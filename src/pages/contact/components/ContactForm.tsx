@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Lock } from 'lucide-react';
 import { track } from '@/lib/analytics';
 
 export default function ContactForm() {
@@ -191,7 +192,7 @@ export default function ContactForm() {
 
           <p className="text-xs text-gray-400 text-center flex items-center justify-center gap-1.5">
             <span className="w-3.5 h-3.5 flex items-center justify-center">
-              <i className="ri-lock-line text-xs"></i>
+              <Lock className="text-xs" />
             </span>
             Your information is secure and encrypted. By submitting, you agree to our{' '}
             <a

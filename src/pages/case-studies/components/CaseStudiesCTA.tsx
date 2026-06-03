@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 interface CaseStudiesCTAProps {
   onRequestDemo: () => void;
@@ -29,7 +30,7 @@ export default function CaseStudiesCTA({ onRequestDemo }: CaseStudiesCTAProps) {
             className="px-8 py-4 bg-white text-teal-600 font-semibold rounded-lg hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl cursor-pointer whitespace-nowrap"
           >
             Request a Demo
-            <i className="ri-arrow-right-line ml-2"></i>
+            <ArrowRight className="w-4 h-4 ml-2 inline" />
           </button>
           <Link
             to="/contact"

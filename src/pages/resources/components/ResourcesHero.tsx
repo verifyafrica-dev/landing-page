@@ -1,3 +1,4 @@
+import { Check, LockOpen } from "lucide-react";
 import { useScrollAnimation } from "../../../hooks/useScrollAnimation";
 
 export default function ResourcesHero() {
@@ -17,7 +18,7 @@ export default function ResourcesHero() {
 				}`}
 			>
 				<div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 text-teal-700 text-sm font-medium rounded-full mb-6">
-					<i className="ri-lock-unlock-line" />
+					<LockOpen className="size-4" />
 					<span>Free Resources for Compliance Teams</span>
 				</div>
 				<h1 className="text-3xl md:text-5xl font-bold text-secondary mb-6 leading-tight">

@@ -1,3 +1,5 @@
+import { Mail, Phone } from "lucide-react";
+
 export default function ContactInfo() {
 	return (
 		<section className="py-20 bg-gray-50">
@@ -5,7 +7,7 @@ export default function ContactInfo() {
 				<div className="grid md:grid-cols-2 gap-8">
 					<div className="bg-white p-8 rounded-xl shadow-sm">
 						<div className="w-12 h-12 flex items-center justify-center bg-teal-100 rounded-lg mb-4">
-							<i className="ri-mail-line text-2xl text-teal-600"></i>
+							<Mail className="text-2xl text-teal-600" />
 						</div>
 						<h3 className="text-lg font-semibold text-secondary mb-2">
 							Email Us
@@ -23,7 +25,7 @@ export default function ContactInfo() {
 
 					<div className="bg-white p-8 rounded-xl shadow-sm">
 						<div className="w-12 h-12 flex items-center justify-center bg-teal-100 rounded-lg mb-4">
-							<i className="ri-phone-line text-2xl text-teal-600"></i>
+							<Phone className="text-2xl text-teal-600" />
 						</div>
 						<h3 className="text-lg font-semibold text-secondary mb-2">
 							Call Us

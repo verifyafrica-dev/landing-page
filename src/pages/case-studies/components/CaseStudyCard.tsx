@@ -1,3 +1,5 @@
+import { ArrowRight } from "lucide-react";
+
 interface CaseStudyResult {
 	metric: string;
 	label: string;
@@ -86,7 +88,7 @@ export default function CaseStudyCard({
 					<span className="text-sm font-medium text-teal-600 group-hover:text-teal-700 transition-colors">
 						Read Full Story
 					</span>
-					<i className="ri-arrow-right-line text-teal-600 group-hover:translate-x-1 transition-transform"></i>
+					<ArrowRight className="w-4 h-4 text-teal-600 group-hover:translate-x-1 transition-transform" />
 				</div>
 			</div>
 		</div>

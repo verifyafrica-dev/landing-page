@@ -1,3 +1,5 @@
+import { CircleHelp, Users } from "lucide-react";
+
 export default function SupportResources() {
 	return (
 		<section className="py-20 bg-gray-50">
@@ -17,7 +19,7 @@ export default function SupportResources() {
 						className="bg-white p-6 rounded-xl border border-gray-100 hover:border-teal-200 hover:bg-teal-50/30 transition-colors cursor-pointer"
 					>
 						<div className="w-12 h-12 flex items-center justify-center bg-teal-100 rounded-lg mb-4">
-							<i className="ri-question-line text-2xl text-teal-600"></i>
+							<CircleHelp className="text-2xl text-teal-600" />
 						</div>
 						<h3 className="text-lg font-semibold text-secondary mb-2">FAQ</h3>
 						<p className="text-sm text-gray-600">

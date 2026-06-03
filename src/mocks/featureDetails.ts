@@ -1,13 +1,62 @@
+import type { LucideIcon } from 'lucide-react';
+import {
+  AlertTriangle,
+  BarChart2,
+  BarChart3,
+  Bell,
+  Brain,
+  Bug,
+  Building,
+  Building2,
+  Camera,
+  Code2,
+  Database,
+  FileText,
+  Fingerprint,
+  Gauge,
+  GitBranch,
+  Globe,
+  History,
+  LayoutDashboard,
+  LineChart,
+  Link,
+  List,
+  Map,
+  MapPin,
+  Newspaper,
+  PieChart,
+  Radar,
+  RefreshCw,
+  Route,
+  Scan,
+  ScanLine,
+  Settings,
+  Shield,
+  ShieldAlert,
+  ShieldCheck,
+  Smartphone,
+  UserSearch,
+  Users,
+  Video,
+  Webhook,
+  Workflow,
+  Bot,
+  Navigation,
+  FileChartColumn,
+  Star,
+  Heart,
+} from 'lucide-react';
+
 export interface FeatureDetail {
   slug: string;
-  icon: string;
+  icon: LucideIcon;
   title: string;
   tagline: string;
   description: string;
   heroImage: string;
   stats: { value: string; label: string }[];
   howItWorks: { step: number; title: string; description: string }[];
-  capabilities: { icon: string; title: string; description: string }[];
+  capabilities: { icon: LucideIcon; title: string; description: string }[];
   useCases: { industry: string; description: string }[];
   faqs: { question: string; answer: string }[];
 }
@@ -15,7 +64,7 @@ export interface FeatureDetail {
 export const featureDetails: FeatureDetail[] = [
   {
     slug: 'identity-verification',
-    icon: 'ri-shield-check-line',
+    icon: PLACEHOLDER_shield-check-line',
     title: 'Identity Verification',
     tagline: 'Verify any African identity in seconds — not days.',
     description:
@@ -55,12 +104,12 @@ export const featureDetails: FeatureDetail[] = [
       },
     ],
     capabilities: [
-      { icon: 'ri-file-text-line', title: 'Multi-Document Support', description: 'National IDs, passports, driver\'s licences, voter cards, residence permits, and more.' },
-      { icon: 'ri-scan-line', title: 'MRZ & Barcode Reading', description: 'Machine-readable zone and barcode extraction for instant data parsing.' },
-      { icon: 'ri-shield-flash-line', title: 'Tamper Detection', description: 'AI models detect photo substitution, font inconsistencies, and digital manipulation.' },
-      { icon: 'ri-database-2-line', title: 'Registry Verification', description: 'Direct integration with national registries in Nigeria, Ghana, Kenya, South Africa, and more.' },
-      { icon: 'ri-global-line', title: 'Pan-African Coverage', description: 'All 54 African countries supported with localised document templates.' },
-      { icon: 'ri-code-s-slash-line', title: 'REST API & SDK', description: 'Simple REST API and mobile SDKs for iOS and Android for fast integration.' },
+      { icon: PLACEHOLDER_file-text-line', title: 'Multi-Document Support', description: 'National IDs, passports, driver\'s licences, voter cards, residence permits, and more.' },
+      { icon: PLACEHOLDER_scan-line', title: 'MRZ & Barcode Reading', description: 'Machine-readable zone and barcode extraction for instant data parsing.' },
+      { icon: PLACEHOLDER_shield-flash-line', title: 'Tamper Detection', description: 'AI models detect photo substitution, font inconsistencies, and digital manipulation.' },
+      { icon: PLACEHOLDER_database-2-line', title: 'Registry Verification', description: 'Direct integration with national registries in Nigeria, Ghana, Kenya, South Africa, and more.' },
+      { icon: PLACEHOLDER_global-line', title: 'Pan-African Coverage', description: 'All 54 African countries supported with localised document templates.' },
+      { icon: PLACEHOLDER_code-s-slash-line', title: 'REST API & SDK', description: 'Simple REST API and mobile SDKs for iOS and Android for fast integration.' },
     ],
     useCases: [
       { industry: 'Fintech & Neobanks', description: 'Onboard customers compliantly in minutes, meeting CBN, BOG, and other central bank KYC requirements.' },
@@ -76,7 +125,7 @@ export const featureDetails: FeatureDetail[] = [
   },
   {
     slug: 'business-verification-kyb',
-    icon: 'ri-building-line',
+    icon: PLACEHOLDER_building-line',
     title: 'Business Verification (KYB)',
     tagline: 'Know every business you work with — from registration to UBO.',
     description:
@@ -112,12 +161,12 @@ export const featureDetails: FeatureDetail[] = [
       },
     ],
     capabilities: [
-      { icon: 'ri-building-4-line', title: 'Registry Integration', description: 'Direct connections to CAC (Nigeria), CIPC (South Africa), RGC (Ghana), and 27+ more registries.' },
-      { icon: 'ri-git-branch-line', title: 'Ownership Mapping', description: 'Visualise full corporate ownership trees with percentage stakes and control flags.' },
-      { icon: 'ri-user-search-line', title: 'UBO Identification', description: 'Automatically identify and verify all beneficial owners above configurable thresholds (e.g. 10%, 25%).' },
-      { icon: 'ri-file-list-3-line', title: 'Document Collection', description: 'Collect and verify certificates of incorporation, memoranda, and financial statements.' },
-      { icon: 'ri-alert-line', title: 'AML Screening', description: 'Screen all entities and individuals against global sanctions, PEP, and adverse media databases.' },
-      { icon: 'ri-refresh-line', title: 'Ongoing Monitoring', description: 'Continuous monitoring of company status, director changes, and new sanctions hits.' },
+      { icon: PLACEHOLDER_building-4-line', title: 'Registry Integration', description: 'Direct connections to CAC (Nigeria), CIPC (South Africa), RGC (Ghana), and 27+ more registries.' },
+      { icon: PLACEHOLDER_git-branch-line', title: 'Ownership Mapping', description: 'Visualise full corporate ownership trees with percentage stakes and control flags.' },
+      { icon: PLACEHOLDER_user-search-line', title: 'UBO Identification', description: 'Automatically identify and verify all beneficial owners above configurable thresholds (e.g. 10%, 25%).' },
+      { icon: PLACEHOLDER_file-list-3-line', title: 'Document Collection', description: 'Collect and verify certificates of incorporation, memoranda, and financial statements.' },
+      { icon: PLACEHOLDER_alert-line', title: 'AML Screening', description: 'Screen all entities and individuals against global sanctions, PEP, and adverse media databases.' },
+      { icon: PLACEHOLDER_refresh-line', title: 'Ongoing Monitoring', description: 'Continuous monitoring of company status, director changes, and new sanctions hits.' },
     ],
     useCases: [
       { industry: 'Banks & Lenders', description: 'Perform thorough due diligence on corporate borrowers and business account applicants.' },
@@ -133,7 +182,7 @@ export const featureDetails: FeatureDetail[] = [
   },
   {
     slug: 'aml-sanctions-screening',
-    icon: 'ri-alert-line',
+    icon: PLACEHOLDER_alert-line',
     title: 'AML & Sanctions Screening',
     tagline: 'Screen every customer against every list — in real time.',
     description:
@@ -169,12 +218,12 @@ export const featureDetails: FeatureDetail[] = [
       },
     ],
     capabilities: [
-      { icon: 'ri-global-line', title: '1,500+ Lists', description: 'OFAC, UN, EU, HMT, FATF, and 1,500+ national and international sanctions lists.' },
-      { icon: 'ri-user-star-line', title: 'PEP Screening', description: 'Politically Exposed Persons database covering 200+ countries with family and close associates.' },
-      { icon: 'ri-newspaper-line', title: 'Adverse Media', description: 'AI-powered adverse media screening across news sources in 50+ languages.' },
-      { icon: 'ri-brain-line', title: 'Fuzzy Matching AI', description: 'Handles name variations, transliterations, nicknames, and aliases with high accuracy.' },
-      { icon: 'ri-refresh-line', title: 'Continuous Monitoring', description: 'Ongoing screening of your entire customer base with real-time alerts on new hits.' },
-      { icon: 'ri-dashboard-line', title: 'Case Management', description: 'Built-in case management for reviewing, escalating, and documenting screening decisions.' },
+      { icon: PLACEHOLDER_global-line', title: '1,500+ Lists', description: 'OFAC, UN, EU, HMT, FATF, and 1,500+ national and international sanctions lists.' },
+      { icon: PLACEHOLDER_user-star-line', title: 'PEP Screening', description: 'Politically Exposed Persons database covering 200+ countries with family and close associates.' },
+      { icon: PLACEHOLDER_newspaper-line', title: 'Adverse Media', description: 'AI-powered adverse media screening across news sources in 50+ languages.' },
+      { icon: PLACEHOLDER_brain-line', title: 'Fuzzy Matching AI', description: 'Handles name variations, transliterations, nicknames, and aliases with high accuracy.' },
+      { icon: PLACEHOLDER_refresh-line', title: 'Continuous Monitoring', description: 'Ongoing screening of your entire customer base with real-time alerts on new hits.' },
+      { icon: PLACEHOLDER_dashboard-line', title: 'Case Management', description: 'Built-in case management for reviewing, escalating, and documenting screening decisions.' },
     ],
     useCases: [
       { industry: 'Fintech & Banking', description: 'Meet FATF, CBN, and local AML obligations with automated screening at onboarding and ongoing monitoring.' },
@@ -190,7 +239,7 @@ export const featureDetails: FeatureDetail[] = [
   },
   {
     slug: 'fraud-detection',
-    icon: 'ri-bug-line',
+    icon: PLACEHOLDER_bug-line',
     title: 'Fraud Detection',
     tagline: 'Stop fraud before it costs you — with AI that learns.',
     description:
@@ -226,12 +275,12 @@ export const featureDetails: FeatureDetail[] = [
       },
     ],
     capabilities: [
-      { icon: 'ri-smartphone-line', title: 'Device Intelligence', description: 'Device fingerprinting, emulator detection, and VPN/proxy identification.' },
-      { icon: 'ri-map-pin-2-line', title: 'IP & Geolocation', description: 'IP reputation scoring, impossible travel detection, and geolocation risk signals.' },
-      { icon: 'ri-user-heart-line', title: 'Behavioural Biometrics', description: 'Typing patterns, mouse movements, and interaction timing to detect bots and account takeovers.' },
-      { icon: 'ri-links-line', title: 'Network Analysis', description: 'Graph-based analysis to detect fraud rings and shared identity signals across accounts.' },
-      { icon: 'ri-settings-3-line', title: 'Custom Rules Engine', description: 'Build and deploy custom fraud rules without code using our visual rules builder.' },
-      { icon: 'ri-line-chart-line', title: 'Adaptive ML', description: 'Models continuously learn from your feedback to improve accuracy over time.' },
+      { icon: PLACEHOLDER_smartphone-line', title: 'Device Intelligence', description: 'Device fingerprinting, emulator detection, and VPN/proxy identification.' },
+      { icon: PLACEHOLDER_map-pin-2-line', title: 'IP & Geolocation', description: 'IP reputation scoring, impossible travel detection, and geolocation risk signals.' },
+      { icon: PLACEHOLDER_user-heart-line', title: 'Behavioural Biometrics', description: 'Typing patterns, mouse movements, and interaction timing to detect bots and account takeovers.' },
+      { icon: PLACEHOLDER_links-line', title: 'Network Analysis', description: 'Graph-based analysis to detect fraud rings and shared identity signals across accounts.' },
+      { icon: PLACEHOLDER_settings-3-line', title: 'Custom Rules Engine', description: 'Build and deploy custom fraud rules without code using our visual rules builder.' },
+      { icon: PLACEHOLDER_line-chart-line', title: 'Adaptive ML', description: 'Models continuously learn from your feedback to improve accuracy over time.' },
     ],
     useCases: [
       { industry: 'Neobanks', description: 'Detect synthetic identities and account takeovers during onboarding and login.' },
@@ -247,7 +296,7 @@ export const featureDetails: FeatureDetail[] = [
   },
   {
     slug: 'biometrics-liveness',
-    icon: 'ri-fingerprint-line',
+    icon: PLACEHOLDER_fingerprint-line',
     title: 'Biometrics & Liveness',
     tagline: 'Prove the person is real — not a photo, mask, or deepfake.',
     description:
@@ -283,12 +332,12 @@ export const featureDetails: FeatureDetail[] = [
       },
     ],
     capabilities: [
-      { icon: 'ri-camera-line', title: 'Passive Liveness', description: 'No user action required — liveness is detected from a single selfie frame.' },
-      { icon: 'ri-vidicon-line', title: 'Active Liveness', description: 'Challenge-response liveness for high-risk scenarios requiring stronger assurance.' },
-      { icon: 'ri-robot-line', title: 'Deepfake Detection', description: 'AI models trained to detect GAN-generated and diffusion-model deepfake faces.' },
-      { icon: 'ri-scan-2-line', title: '3D Facial Matching', description: '3D geometry-based facial comparison for high accuracy across lighting conditions.' },
-      { icon: 'ri-smartphone-line', title: 'Mobile SDK', description: 'Native iOS and Android SDKs with optimised camera handling for African network conditions.' },
-      { icon: 'ri-file-shield-2-line', title: 'ISO 30107 Compliant', description: 'Certified against ISO 30107-3 Presentation Attack Detection standards.' },
+      { icon: PLACEHOLDER_camera-line', title: 'Passive Liveness', description: 'No user action required — liveness is detected from a single selfie frame.' },
+      { icon: PLACEHOLDER_vidicon-line', title: 'Active Liveness', description: 'Challenge-response liveness for high-risk scenarios requiring stronger assurance.' },
+      { icon: PLACEHOLDER_robot-line', title: 'Deepfake Detection', description: 'AI models trained to detect GAN-generated and diffusion-model deepfake faces.' },
+      { icon: PLACEHOLDER_scan-2-line', title: '3D Facial Matching', description: '3D geometry-based facial comparison for high accuracy across lighting conditions.' },
+      { icon: PLACEHOLDER_smartphone-line', title: 'Mobile SDK', description: 'Native iOS and Android SDKs with optimised camera handling for African network conditions.' },
+      { icon: PLACEHOLDER_file-shield-2-line', title: 'ISO 30107 Compliant', description: 'Certified against ISO 30107-3 Presentation Attack Detection standards.' },
     ],
     useCases: [
       { industry: 'Fintech & Banking', description: 'Confirm customer identity at account opening and for high-value transaction authorisation.' },
@@ -304,7 +353,7 @@ export const featureDetails: FeatureDetail[] = [
   },
   {
     slug: 'address-verification-geolocation',
-    icon: 'ri-map-pin-line',
+    icon: PLACEHOLDER_map-pin-line',
     title: 'Address Verification & Geolocation',
     tagline: 'Confirm where your customers really are — across all of Africa.',
     description:
@@ -340,12 +389,12 @@ export const featureDetails: FeatureDetail[] = [
       },
     ],
     capabilities: [
-      { icon: 'ri-map-2-line', title: 'African Address Normalisation', description: 'Handles informal, landmark-based, and non-standard African address formats.' },
-      { icon: 'ri-file-text-line', title: 'Proof of Address OCR', description: 'Extract and verify address data from utility bills, bank statements, and government letters.' },
-      { icon: 'ri-gps-line', title: 'GPS Verification', description: 'Verify customer location using device GPS with tamper detection.' },
-      { icon: 'ri-global-line', title: 'IP Intelligence', description: 'IP geolocation, VPN/proxy detection, and Tor exit node identification.' },
-      { icon: 'ri-route-line', title: 'Impossible Travel Detection', description: 'Flag accounts showing physically impossible location changes between sessions.' },
-      { icon: 'ri-alert-line', title: 'High-Risk Jurisdiction Flags', description: 'Automatic flagging of addresses in FATF grey-listed or sanctioned jurisdictions.' },
+      { icon: PLACEHOLDER_map-2-line', title: 'African Address Normalisation', description: 'Handles informal, landmark-based, and non-standard African address formats.' },
+      { icon: PLACEHOLDER_file-text-line', title: 'Proof of Address OCR', description: 'Extract and verify address data from utility bills, bank statements, and government letters.' },
+      { icon: PLACEHOLDER_gps-line', title: 'GPS Verification', description: 'Verify customer location using device GPS with tamper detection.' },
+      { icon: PLACEHOLDER_global-line', title: 'IP Intelligence', description: 'IP geolocation, VPN/proxy detection, and Tor exit node identification.' },
+      { icon: PLACEHOLDER_route-line', title: 'Impossible Travel Detection', description: 'Flag accounts showing physically impossible location changes between sessions.' },
+      { icon: PLACEHOLDER_alert-line', title: 'High-Risk Jurisdiction Flags', description: 'Automatic flagging of addresses in FATF grey-listed or sanctioned jurisdictions.' },
     ],
     useCases: [
       { industry: 'Fintech & Banking', description: 'Verify customer addresses for KYC compliance and detect location-based fraud signals.' },
@@ -361,7 +410,7 @@ export const featureDetails: FeatureDetail[] = [
   },
   {
     slug: 'transaction-risk-scoring',
-    icon: 'ri-bar-chart-line',
+    icon: PLACEHOLDER_bar-chart-line',
     title: 'Transaction Risk Scoring & Decisioning',
     tagline: 'Score every transaction. Automate every decision.',
     description:
@@ -397,12 +446,12 @@ export const featureDetails: FeatureDetail[] = [
       },
     ],
     capabilities: [
-      { icon: 'ri-speed-line', title: 'Real-time Scoring', description: 'Sub-100ms scoring latency for seamless integration into payment flows.' },
-      { icon: 'ri-settings-3-line', title: 'Configurable Rules', description: 'Visual rules builder for creating velocity checks, amount limits, and custom logic.' },
-      { icon: 'ri-bar-chart-2-line', title: 'Velocity Checks', description: 'Monitor transaction frequency, amounts, and patterns across configurable time windows.' },
-      { icon: 'ri-group-line', title: 'Peer Benchmarking', description: 'Compare customer behaviour against anonymised peer groups to detect anomalies.' },
-      { icon: 'ri-flow-chart', title: 'Decision Workflows', description: 'Build automated decision workflows with step-up authentication and manual review routing.' },
-      { icon: 'ri-pie-chart-line', title: 'Analytics Dashboard', description: 'Real-time analytics on transaction volumes, risk distributions, and decision outcomes.' },
+      { icon: PLACEHOLDER_speed-line', title: 'Real-time Scoring', description: 'Sub-100ms scoring latency for seamless integration into payment flows.' },
+      { icon: PLACEHOLDER_settings-3-line', title: 'Configurable Rules', description: 'Visual rules builder for creating velocity checks, amount limits, and custom logic.' },
+      { icon: PLACEHOLDER_bar-chart-2-line', title: 'Velocity Checks', description: 'Monitor transaction frequency, amounts, and patterns across configurable time windows.' },
+      { icon: PLACEHOLDER_group-line', title: 'Peer Benchmarking', description: 'Compare customer behaviour against anonymised peer groups to detect anomalies.' },
+      { icon: PLACEHOLDER_flow-chart', title: 'Decision Workflows', description: 'Build automated decision workflows with step-up authentication and manual review routing.' },
+      { icon: PLACEHOLDER_pie-chart-line', title: 'Analytics Dashboard', description: 'Real-time analytics on transaction volumes, risk distributions, and decision outcomes.' },
     ],
     useCases: [
       { industry: 'Payment Processors', description: 'Score every payment in real time to prevent fraud while minimising false declines.' },
@@ -418,7 +467,7 @@ export const featureDetails: FeatureDetail[] = [
   },
   {
     slug: 'ongoing-monitoring',
-    icon: 'ri-refresh-line',
+    icon: PLACEHOLDER_refresh-line',
     title: 'Ongoing Monitoring',
     tagline: 'Compliance doesn\'t stop at onboarding — neither do we.',
     description:
@@ -454,12 +503,12 @@ export const featureDetails: FeatureDetail[] = [
       },
     ],
     capabilities: [
-      { icon: 'ri-radar-line', title: 'Real-time List Updates', description: 'Sanctions and PEP lists are monitored and re-screened within minutes of updates.' },
-      { icon: 'ri-newspaper-line', title: 'Adverse Media Monitoring', description: 'Continuous monitoring of news sources in 50+ languages for negative mentions.' },
-      { icon: 'ri-notification-3-line', title: 'Configurable Alerts', description: 'Set alert thresholds, delivery channels, and escalation rules per customer segment.' },
-      { icon: 'ri-history-line', title: 'Audit Trail', description: 'Complete audit trail of all screening events, alerts, and case decisions for regulatory review.' },
-      { icon: 'ri-webhook-line', title: 'Webhook Delivery', description: 'Real-time alert delivery via webhooks for seamless integration into your workflows.' },
-      { icon: 'ri-file-chart-line', title: 'Regulatory Reporting', description: 'Automated generation of monitoring reports for regulatory submissions.' },
+      { icon: PLACEHOLDER_radar-line', title: 'Real-time List Updates', description: 'Sanctions and PEP lists are monitored and re-screened within minutes of updates.' },
+      { icon: PLACEHOLDER_newspaper-line', title: 'Adverse Media Monitoring', description: 'Continuous monitoring of news sources in 50+ languages for negative mentions.' },
+      { icon: PLACEHOLDER_notification-3-line', title: 'Configurable Alerts', description: 'Set alert thresholds, delivery channels, and escalation rules per customer segment.' },
+      { icon: PLACEHOLDER_history-line', title: 'Audit Trail', description: 'Complete audit trail of all screening events, alerts, and case decisions for regulatory review.' },
+      { icon: PLACEHOLDER_webhook-line', title: 'Webhook Delivery', description: 'Real-time alert delivery via webhooks for seamless integration into your workflows.' },
+      { icon: PLACEHOLDER_file-chart-line', title: 'Regulatory Reporting', description: 'Automated generation of monitoring reports for regulatory submissions.' },
     ],
     useCases: [
       { industry: 'Banks & Lenders', description: 'Meet ongoing CDD requirements and detect changes in customer risk profiles post-onboarding.' },

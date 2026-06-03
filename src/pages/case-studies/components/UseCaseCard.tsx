@@ -1,3 +1,4 @@
+import { ArrowRight, type LucideIcon } from "lucide-react";
 
 interface UseCaseBenefit {
   metric: string;
@@ -6,7 +7,7 @@ interface UseCaseBenefit {
 
 interface UseCaseCardProps {
   category: string;
-  icon: string;
+  icon: LucideIcon;
   color: string;
   description: string;
   useCases: string[];
@@ -17,7 +18,7 @@ interface UseCaseCardProps {
 
 export default function UseCaseCard({
   category,
-  icon,
+  icon: Icon,
   color,
   description,
   useCases,
@@ -41,7 +42,7 @@ export default function UseCaseCard({
         
         {/* Icon Badge */}
         <div className={`absolute top-4 left-4 w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br ${color} shadow-lg`}>
-          <i className={`${icon} text-xl text-white`}></i>
+          <Icon className="w-5 h-5 text-white" />
         </div>
 
         {/* Category Name */}
@@ -90,7 +91,7 @@ export default function UseCaseCard({
           <span className="text-sm font-medium text-teal-600 group-hover:text-teal-700 transition-colors">
             View Details
           </span>
-          <i className="ri-arrow-right-line text-teal-600 group-hover:translate-x-1 transition-transform"></i>
+          <ArrowRight className="w-4 h-4 text-teal-600 group-hover:translate-x-1 transition-transform" />
         </div>
       </div>
     </div>

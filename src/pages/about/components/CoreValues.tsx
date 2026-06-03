@@ -1,8 +1,23 @@
+import {
+	ShieldCheck,
+	Globe,
+	Lightbulb,
+	Users,
+	Lock,
+	Scale,
+	type LucideIcon,
+} from "lucide-react";
 import { useStaggerAnimation } from "../../../hooks/useScrollAnimation";
 
-const values = [
+const values: {
+	icon: LucideIcon;
+	title: string;
+	description: string;
+	bg: string;
+	iconColor: string;
+}[] = [
 	{
-		icon: "ri-shield-check-line",
+		icon: ShieldCheck,
 		title: "Trust First",
 		description:
 			"Every decision we make is rooted in building and maintaining trust — with our clients, their customers, and the regulators who oversee them.",
@@ -10,7 +25,7 @@ const values = [
 		iconColor: "text-teal-600",
 	},
 	{
-		icon: "ri-global-line",
+		icon: Globe,
 		title: "Africa-Native",
 		description:
 			"We don’t adapt foreign solutions for Africa. We build from the ground up, understanding local regulations, data sources, and market nuances.",
@@ -18,7 +33,7 @@ const values = [
 		iconColor: "text-amber-600",
 	},
 	{
-		icon: "ri-lightbulb-line",
+		icon: Lightbulb,
 		title: "Relentless Innovation",
 		description:
 			"From AI-powered document verification to real-time risk scoring, we continuously push the boundaries of what compliance technology can do.",
@@ -26,7 +41,7 @@ const values = [
 		iconColor: "text-rose-600",
 	},
 	{
-		icon: "ri-team-line",
+		icon: Users,
 		title: "Customer Obsession",
 		description:
 			"Our clients’ success is our success. We provide dedicated support, custom integrations, and proactive compliance guidance to every partner.",
@@ -34,7 +49,7 @@ const values = [
 		iconColor: "text-cyan-600",
 	},
 	{
-		icon: "ri-lock-line",
+		icon: Lock,
 		title: "Security by Design",
 		description:
 			"Data protection isn’t an afterthought. We embed security into every layer of our platform — from encryption at rest to SOC 2 compliance.",
@@ -42,7 +57,7 @@ const values = [
 		iconColor: "text-emerald-600",
 	},
 	{
-		icon: "ri-scales-3-line",
+		icon: Scale,
 		title: "Regulatory Excellence",
 		description:
 			"We stay ahead of evolving regulations across 54 countries, ensuring our clients are always compliant with the latest requirements.",
@@ -114,7 +129,7 @@ export default function CoreValues() {
 							<div
 								className={`w-12 h-12 flex items-center justify-center ${value.bg} rounded-lg mb-5 group-hover:scale-110 transition-transform duration-300`}
 							>
-								<i className={`${value.icon} text-xl ${value.iconColor}`}></i>
+								<value.icon className={`text-xl ${value.iconColor}`} />
 							</div>
 							<h4 className="text-lg font-bold text-secondary mb-2">
 								<a

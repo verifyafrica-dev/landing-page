@@ -3,9 +3,10 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
-@theme {
-  --font-sans: Inter, system-ui, -apple-system, sans-serif;
 
+@theme {
+  --font-sans: "Geist Variable", sans-serif;
+  
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -91,7 +92,7 @@
   body {
     @apply antialiased bg-background text-foreground;
     /* System font stack renders immediately; Inter swaps in once loaded */
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-sans);
     font-display: swap;
   }
   .theme {

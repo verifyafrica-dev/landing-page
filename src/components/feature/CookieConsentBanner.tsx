@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Cookie } from "lucide-react";
 
 type ConsentStatus = "accepted" | "declined" | null;
 
@@ -48,7 +49,7 @@ export default function CookieConsentBanner() {
 					<div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-8">
 						{/* Cookie icon */}
 						<div className="hidden lg:flex w-10 h-10 flex-shrink-0 items-center justify-center rounded-full bg-teal-50 border border-teal-100">
-							<i className="ri-cookie-line text-teal-600 text-lg"></i>
+							<Cookie className="text-teal-600 text-lg" />
 						</div>
 
 						{/* Message */}

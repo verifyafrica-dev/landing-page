@@ -1,30 +1,42 @@
+import {
+	ShieldCheck,
+	Lock,
+	FileShield,
+	CreditCard,
+	Landmark,
+	type LucideIcon,
+} from "lucide-react";
 import { useScrollAnimation } from "../../../hooks/useScrollAnimation";
 
-const certifications = [
+const certifications: {
+	name: string;
+	description: string;
+	icon: LucideIcon;
+}[] = [
 	{
 		name: "ISO 27001",
 		description: "Information Security",
-		icon: "ri-shield-check-line",
+		icon: ShieldCheck,
 	},
 	{
 		name: "SOC 2 Type II",
 		description: "Service Organization",
-		icon: "ri-lock-line",
+		icon: Lock,
 	},
 	{
 		name: "GDPR",
 		description: "Data Protection",
-		icon: "ri-file-shield-2-line",
+		icon: FileShield,
 	},
 	{
 		name: "PCI DSS",
 		description: "Payment Security",
-		icon: "ri-bank-card-line",
+		icon: CreditCard,
 	},
 	{
 		name: "NDPR",
 		description: "Nigeria Data Protection",
-		icon: "ri-government-line",
+		icon: Landmark,
 	},
 ];
 
@@ -71,7 +83,7 @@ export default function Certifications() {
 							style={{ transitionDelay: `${150 + index * 100}ms` }}
 						>
 							<div className="w-14 h-14 flex items-center justify-center bg-teal-50 rounded-full mb-4 group-hover:bg-teal-100 group-hover:scale-110 transition-all duration-300">
-								<i className={`${cert.icon} text-2xl text-teal-600`}></i>
+								<cert.icon className="text-2xl text-teal-600" />
 							</div>
 							<span className="text-sm font-bold text-secondary mb-1">
 								{cert.name}

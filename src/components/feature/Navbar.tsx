@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { X, Menu, ExternalLink } from 'lucide-react';
 import { smoothScrollTo } from '../../hooks/useScrollAnimation';
 
 interface NavbarProps {
@@ -233,7 +234,11 @@ export default function Navbar({ onRequestDemo, variant = 'transparent' }: Navba
                 }`}
                 aria-label="Toggle menu"
               >
-                <i className={`${isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-line'} text-2xl`}></i>
+                {isMobileMenuOpen ? (
+                  <X className="text-2xl" />
+                ) : (
+                  <Menu className="text-2xl" />
+                )}
               </button>
             </div>
           </div>
@@ -269,7 +274,7 @@ export default function Navbar({ onRequestDemo, variant = 'transparent' }: Navba
               >
                 {item.label}
                 {item.isExternal && (
-                  <i className="ri-external-link-line text-sm ml-1.5 opacity-50"></i>
+                  <ExternalLink className="text-sm ml-1.5 opacity-50" />
                 )}
               </button>
             ))}

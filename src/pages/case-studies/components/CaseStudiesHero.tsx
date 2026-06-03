@@ -1,3 +1,5 @@
+import { Globe } from "lucide-react";
+
 export default function CaseStudiesHero() {
 	return (
 		<section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
@@ -12,7 +14,7 @@ export default function CaseStudiesHero() {
 				<div className="text-center">
 					{/* Badge */}
 					<div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-500/10 border border-teal-500/20 rounded-full mb-6">
-						<i className="ri-global-line text-teal-400"></i>
+						<Globe className="w-4 h-4 text-teal-400" />
 						<span className="text-teal-400 text-sm font-medium">
 							Use Cases &amp; Coverage
 						</span>

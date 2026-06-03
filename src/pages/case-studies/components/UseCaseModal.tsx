@@ -1,4 +1,13 @@
 import { useEffect } from "react";
+import {
+	Calendar,
+	Check,
+	ChevronRight,
+	CircleCheck,
+	CircleHelp,
+	type LucideIcon,
+	X,
+} from "lucide-react";
 
 interface UseCaseBenefit {
 	metric: string;

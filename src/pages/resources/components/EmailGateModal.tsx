@@ -1,4 +1,11 @@
 import { useState, useEffect } from "react";
+import {
+	AlertTriangle,
+	Check,
+	Loader2,
+	LockOpen,
+	X,
+} from "lucide-react";
 
 interface EmailGateModalProps {
 	isOpen: boolean;
@@ -138,7 +145,7 @@ export default function EmailGateModal({
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-3">
 							<div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-								<i className="ri-lock-unlock-line text-xl text-white" />
+								<LockOpen className="size-5 text-white" />
 							</div>
 							<div>
 								<h3 className="text-white font-semibold text-sm">
@@ -153,7 +160,7 @@ export default function EmailGateModal({
 							onClick={onClose}
 							className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/20 text-white hover:bg-white/30 transition-colors cursor-pointer"
 						>
-							<i className="ri-close-line" />
+							<X className="size-5" />
 						</button>
 					</div>
 				</div>

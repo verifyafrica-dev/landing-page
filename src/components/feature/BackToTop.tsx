@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ArrowUp } from 'lucide-react';
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -28,7 +29,7 @@ export default function BackToTop() {
           : 'opacity-0 translate-y-4 pointer-events-none',
       ].join(' ')}
     >
-      <i className="ri-arrow-up-line text-lg"></i>
+      <ArrowUp className="text-lg" />
     </button>
   );
 }

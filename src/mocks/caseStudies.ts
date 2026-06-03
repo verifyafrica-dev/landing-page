@@ -1,8 +1,29 @@
-export const useCaseCategories = [
+import {
+  ArrowLeftRight,
+  Building,
+  Coins,
+  Gamepad2,
+  Radio,
+  ShieldCheck,
+  ShoppingBag,
+  Smartphone,
+  type LucideIcon,
+} from "lucide-react";
+
+export const useCaseCategories: {
+  id: number;
+  category: string;
+  icon: LucideIcon;
+  color: string;
+  description: string;
+  useCases: string[];
+  benefits: { metric: string; label: string }[];
+  image: string;
+}[] = [
   {
     id: 1,
     category: "Banks & Financial Institutions",
-    icon: "ri-bank-line",
+    icon: Building,
     color: "from-teal-500 to-emerald-500",
     description: "Traditional banks, microfinance institutions, and credit unions requiring robust KYC/AML compliance.",
     useCases: [
@@ -22,7 +43,7 @@ export const useCaseCategories = [
   {
     id: 2,
     category: "Fintechs & Payment Providers",
-    icon: "ri-smartphone-line",
+    icon: Smartphone,
     color: "from-cyan-500 to-teal-500",
     description: "Digital payment platforms, mobile money operators, and fintech startups scaling across Africa.",
     useCases: [
@@ -42,7 +63,7 @@ export const useCaseCategories = [
   {
     id: 3,
     category: "FX Brokers",
-    icon: "ri-exchange-line",
+    icon: ArrowLeftRight,
     color: "from-orange-500 to-amber-500",
     description: "Foreign exchange brokers and trading platforms requiring sophisticated risk management and regulatory compliance for high-volume cross-border trading operations.",
     useCases: [
@@ -66,7 +87,7 @@ export const useCaseCategories = [
   {
     id: 4,
     category: "Telecommunications",
-    icon: "ri-signal-tower-line",
+    icon: Radio,
     color: "from-purple-500 to-violet-500",
     description: "Mobile network operators and telecom companies requiring SIM registration and mobile money compliance.",
     useCases: [
@@ -86,7 +107,7 @@ export const useCaseCategories = [
   {
     id: 5,
     category: "E-commerce & Marketplaces",
-    icon: "ri-shopping-bag-line",
+    icon: ShoppingBag,
     color: "from-rose-500 to-pink-500",
     description: "Online marketplaces, e-commerce platforms, and delivery services verifying buyers and sellers.",
     useCases: [
@@ -106,7 +127,7 @@ export const useCaseCategories = [
   {
     id: 6,
     category: "Insurance Companies",
-    icon: "ri-shield-check-line",
+    icon: ShieldCheck,
     color: "from-indigo-500 to-blue-500",
     description: "Insurance providers requiring policyholder verification and claims fraud prevention.",
     useCases: [
@@ -126,7 +147,7 @@ export const useCaseCategories = [
   {
     id: 7,
     category: "iGaming & Sports Betting",
-    icon: "ri-gamepad-line",
+    icon: Gamepad2,
     color: "from-emerald-500 to-teal-500",
     description: "Online casinos, sports betting operators, and lottery platforms meeting AML and responsible gambling compliance across Africa's fast-growing regulated markets.",
     useCases: [
@@ -149,7 +170,7 @@ export const useCaseCategories = [
   {
     id: 9,
     category: "Crypto & Web3",
-    icon: "ri-coin-line",
+    icon: Coins,
     color: "from-yellow-500 to-orange-500",
     description: "Cryptocurrency exchanges, DeFi platforms, and Web3 companies meeting global compliance standards.",
     useCases: [

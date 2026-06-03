@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Building, FileSearch } from "lucide-react";
 import { useCaseCategories } from "../../../mocks/caseStudies";
 import UseCaseCard from "./UseCaseCard";
 import UseCaseModal from "./UseCaseModal";
