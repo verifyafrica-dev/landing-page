@@ -1,7 +1,57 @@
 import { useScrollAnimation } from "../../../hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
+import { Check, Crown, TrendingUp } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { useDemoModal } from "@/hooks/useDemoModal";
+import { Button } from "@/components/ui/button";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
+
+const plans = [
+	{
+		id: "growth",
+		name: "Growth Tier",
+		description: "For scaling businesses expanding into African markets",
+		platformFee: "$950",
+		verificationPrice: "$6–$10",
+		features: [
+			"All verification types included",
+			"Dashboard access",
+			"API integration",
+			"Standard support",
+			"Audit trail & reporting",
+			"Up to 5 team members",
+		],
+		badge: null,
+		highlight: false,
+		icon: TrendingUp,
+	},
+	{
+		id: "enterprise",
+		name: "Enterprise Tier",
+		description: "For regulated, high-volume operators",
+		platformFee: "$1,750",
+		verificationPrice: "$5–$7",
+		features: [
+			"Everything in Growth",
+			"Priority support & SLA",
+			"Custom risk configurations",
+			"Dedicated account manager",
+			"Advanced reporting & analytics",
+			"Unlimited team members",
+			"Custom integrations",
+		],
+		badge: "Recommended",
+		highlight: true,
+		icon: Crown,
+	},
+] as const;
 
 export default function Pricing() {
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
@@ -10,44 +60,10 @@ export default function Pricing() {
 	});
 	const { openDemo } = useDemoModal();
 
-	const plans = [
-		{
-			name: "Growth Tier",
-			description: "For scaling businesses expanding into African markets",
-			platformFee: "$950",
-			verificationPrice: "$6–$10",
-			features: [
-				"All verification types included",
-				"Dashboard access",
-				"API integration",
-				"Standard support",
-				"Audit trail & reporting",
-				"Up to 5 team members",
-			],
-			highlighted: false,
-		},
-		{
-			name: "Enterprise Tier",
-			description: "For regulated, high-volume operators",
-			platformFee: "$1,750",
-			verificationPrice: "$5–$7",
-			features: [
-				"Everything in Growth",
-				"Priority support & SLA",
-				"Custom risk configurations",
-				"Dedicated account manager",
-				"Advanced reporting & analytics",
-				"Unlimited team members",
-				"Custom integrations",
-			],
-			highlighted: true,
-		},
-	];
-
 	return (
 		<section
 			id="pricing"
-			className="py-12 sm:py-16 lg:py-24 bg-white overflow-hidden"
+			className="py-12 sm:py-16 lg:py-24 bg-white "
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
 				<div
@@ -70,116 +86,97 @@ export default function Pricing() {
 					ref={cardsRef}
 					className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto"
 				>
-					{plans.map((plan, index) => (
-						<div
-							key={index}
-							className={`group relative rounded-xl sm:rounded-2xl p-5 sm:p-7 lg:p-10 overflow-hidden cursor-default ${
-								plan.highlighted
-									? "bg-gradient-to-br from-teal-50 to-cyan-50 border-2 border-teal-500"
-									: "bg-white border border-gray-200"
-							}`}
-							style={{
-								opacity: cardsVisible ? 1 : 0,
-								transform: cardsVisible
-									? "translateY(0) scale(1)"
-									: "translateY(50px) scale(0.95)",
-								transition: `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 150}ms`,
-								boxShadow: plan.highlighted
-									? "0 25px 50px -12px rgba(20, 184, 166, 0.25)"
-									: "0 10px 40px -10px rgba(0, 0, 0, 0.1)",
-							}}
-						>
-							{/* Animated background glow for highlighted */}
-							{plan.highlighted && (
-								<div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-									<div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-teal-300/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-									<div className="absolute bottom-0 left-0 w-36 sm:w-48 h-36 sm:h-48 bg-cyan-300/20 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-								</div>
-							)}
+					{plans.map((plan, index) => {
+						const Icon = plan.icon;
+						const cardClasses = `flex flex-col border-2 overflow-visible relative ring-0 ${
+							plan.highlight
+								? "border-teal-500 bg-linear-to-br from-teal-50 via-white to-secondary/5 shadow-lg shadow-teal-500/10"
+								: "border-gray-200 hover:border-secondary/30 transition-colors"
+						}`;
 
-							<div className="relative z-10">
-								{plan.highlighted && (
-									<div className="inline-block px-3 sm:px-4 py-1 bg-teal-500 text-white text-xs font-semibold rounded-full mb-3 sm:mb-4 animate-pulse">
-										RECOMMENDED
+						return (
+							<Card
+								key={plan.id}
+								className={cardClasses}
+								style={{
+									opacity: cardsVisible ? 1 : 0,
+									transform: cardsVisible
+										? "translateY(0) scale(1)"
+										: "translateY(50px) scale(0.95)",
+									transition: `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 150}ms`,
+								}}
+							>
+								{plan.badge && (
+									<div className="absolute -top-3 left-1/2 -translate-x-1/2">
+										<span className="bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+											{plan.badge}
+										</span>
 									</div>
 								)}
-								<h3 className="text-lg sm:text-xl md:text-2xl font-bold text-secondary mb-1.5 sm:mb-2 transition-colors duration-300 group-hover:text-teal-700">
-									{plan.name}
-								</h3>
-								<p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-6">
-									{plan.description}
-								</p>
-
-								<div className="mb-3 sm:mb-6">
-									<div className="flex items-baseline mb-1 sm:mb-2">
-										<span className="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary transition-transform duration-300 group-hover:scale-105">
+								<CardHeader className="p-6">
+									<div className="flex items-center gap-2 mb-2">
+										<div
+											className={`flex items-center justify-center w-8 h-8 rounded-lg ${
+												plan.highlight ? "bg-teal-500/15" : "bg-secondary/10"
+											}`}
+										>
+											<Icon
+												className={`w-4 h-4 ${
+													plan.highlight ? "text-teal-600" : "text-secondary"
+												}`}
+											/>
+										</div>
+										<CardTitle className="text-xl text-secondary">
+											{plan.name}
+										</CardTitle>
+									</div>
+									<CardDescription>{plan.description}</CardDescription>
+									<div className="mt-4">
+										<span className="text-4xl font-bold text-secondary">
 											{plan.platformFee}
 										</span>
-										<span className="text-gray-600 ml-1.5 sm:ml-2 text-xs sm:text-base">
-											/month
-										</span>
+										<span className="text-muted-foreground">/month</span>
+										<p className="text-muted-foreground text-sm mt-1">
+											Platform fee
+										</p>
 									</div>
-									<p className="text-xs sm:text-sm text-gray-600">
-										Platform Fee
+									<p className="text-teal-700 text-xs font-semibold mt-3">
+										Verification pricing: {plan.verificationPrice} per bundle
+										check
 									</p>
-								</div>
-
-								<div className="relative bg-teal-500 text-white rounded-lg p-2.5 sm:p-4 mb-4 sm:mb-8 overflow-hidden group/price">
-									{/* Shine effect */}
-									<div className="absolute inset-0 opacity-0 group-hover/price:opacity-100 transition-opacity duration-500">
-										<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-									</div>
-									<p className="text-xs sm:text-sm font-semibold mb-1 relative z-10">
-										Custom Verification Pricing
-									</p>
-									<p className="text-xs text-teal-100 mt-1 relative z-10">
-										per bundle check
-									</p>
-								</div>
-
-								<ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-8">
-									{plan.features.map((feature, idx) => (
-										<li
-											key={idx}
-											className="flex items-start space-x-2 sm:space-x-3 group/item"
-											style={{
-												opacity: cardsVisible ? 1 : 0,
-												transform: cardsVisible
-													? "translateX(0)"
-													: "translateX(-10px)",
-												transition: `all 0.4s ease-out ${index * 150 + idx * 50 + 300}ms`,
-											}}
-										>
-											<div className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover/item:scale-110">
-												<i className="ri-checkbox-circle-fill text-base sm:text-lg text-teal-500"></i>
-											</div>
-											<span className="text-xs sm:text-sm text-gray-700 transition-colors duration-300 group-hover/item:text-secondary">
+								</CardHeader>
+								<CardContent className="flex-1 p-6 pt-0">
+									<ul className="space-y-3">
+										{plan.features.map((feature) => (
+											<li
+												key={feature}
+												className="flex items-center gap-3 text-sm text-gray-700"
+											>
+												<Check className="h-4 w-4 text-teal-500 shrink-0" />
 												{feature}
-											</span>
-										</li>
-									))}
-								</ul>
-
-								<button
-									onClick={() => {
-										track("pricing_plan_clicked", { plan: plan.name });
-										openDemo();
-									}}
-									className={`relative w-full py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg font-semibold overflow-hidden transition-all whitespace-nowrap group/btn text-xs sm:text-sm md:text-base ${
-										plan.highlighted
-											? "bg-teal-500 text-white hover:shadow-lg hover:shadow-teal-500/30"
-											: "bg-secondary text-white hover:bg-gray-800"
-									}`}
-								>
-									<span className="absolute inset-0 bg-gradient-to-r from-teal-400 to-cyan-400 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
-									<span className="relative z-10 flex items-center justify-center space-x-2">
-										<span>Get Started</span>
-										<i className="ri-arrow-right-line transition-transform group-hover/btn:translate-x-1"></i>
-									</span>
-								</button>
-							</div>
-						</div>
-					))}
+											</li>
+										))}
+									</ul>
+								</CardContent>
+								<CardFooter className="border-0 bg-transparent p-6 pt-0">
+									<Button
+										variant={plan.highlight ? "default" : "outline"}
+										className={`w-full h-12 rounded-full text-base cursor-pointer ${
+											plan.highlight
+												? "bg-teal-500 text-white hover:bg-teal-600 shadow-md shadow-teal-500/20"
+												: "border-secondary text-secondary hover:bg-secondary hover:text-white"
+										}`}
+										onClick={() => {
+											track("pricing_plan_clicked", { plan: plan.name });
+											openDemo();
+										}}
+									>
+										Get Started
+									</Button>
+								</CardFooter>
+							</Card>
+						);
+					})}
 				</div>
 
 				<div
