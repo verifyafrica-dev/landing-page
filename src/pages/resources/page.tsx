@@ -1,17 +1,4 @@
 import { useState, useEffect, lazy, Suspense } from "react";
-import {
-	BarChart3,
-	Fingerprint,
-	Globe,
-	Landmark,
-	LineChart,
-	MessagesSquare,
-	ScanEye,
-	ShieldCheck,
-	TrendingUp,
-	UserPlus,
-	UserSearch,
-} from "lucide-react";
 import { useDemoModal } from "../../hooks/useDemoModal";
 import Navbar from "@/pages/home/components/Navbar";
 import SEOHead from "../../components/feature/SEOHead";

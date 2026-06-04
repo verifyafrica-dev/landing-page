@@ -1,6 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import type { LucideIcon } from "lucide-react";
 import {
 	ArrowRight,
 	Check,
@@ -11,7 +10,6 @@ import {
 	EyeOff,
 	FileText,
 	Flame,
-	Link,
 	List,
 	Lock,
 	LockOpen,
@@ -19,34 +17,22 @@ import {
 import { useScrollAnimation } from "../../../hooks/useScrollAnimation";
 import EmailGateModal from "./EmailGateModal";
 import { track } from "../../../lib/analytics";
-
-function LinkedInIcon({ className }: { className?: string }) {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 24 24"
-			fill="currentColor"
-			className={className}
-			aria-hidden
-		>
-			<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-		</svg>
-	);
-}
-
-function XIcon({ className }: { className?: string }) {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 24 24"
-			fill="currentColor"
-			className={className}
-			aria-hidden
-		>
-			<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-		</svg>
-	);
-}
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export interface Resource {
 	id: string;
@@ -55,7 +41,7 @@ export interface Resource {
 	teaserContent: string[];
 	gatedContent?: string[];
 	pdfUrl?: string;
-	icon: LucideIcon;
+	icon: string;
 	category: string;
 	readTime: string;
 	pages: string;
@@ -115,57 +101,54 @@ export default function ResourceCard({
 		}
 	};
 
-	const handleShare = useCallback(
-		(channel: "linkedin" | "twitter" | "copy_link") => {
-			track("resource_shared", {
-				resource_id: resource.id,
-				resource_title: resource.title,
-				channel,
-			});
+	const shareText = `Check out this free compliance resource: ${resource.title}`;
 
-			const text = encodeURIComponent(
-				`Check out this free compliance resource: ${resource.title}`,
-			);
-			const url = encodeURIComponent(shareUrl);
+	const getShareLink = (channel: "linkedin" | "twitter" | "copy_link") => {
+		if (channel === "copy_link") {
+			return shareUrl;
+		}
+		const encodedUrl = encodeURIComponent(shareUrl);
+		if (channel === "linkedin") {
+			return `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+		}
+		return `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodedUrl}`;
+	};
 
-			if (channel === "linkedin") {
-				window.open(
-					`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-					"_blank",
-					"noopener,noreferrer",
-				);
-			} else if (channel === "twitter") {
-				window.open(
-					`https://twitter.com/intent/tweet?text=${text}&url=${url}`,
-					"_blank",
-					"noopener,noreferrer",
-				);
-			} else if (channel === "copy_link") {
-				navigator.clipboard.writeText(shareUrl).then(() => {
-					setCopiedLink(true);
-					setTimeout(() => setCopiedLink(false), 2000);
-				});
-			}
-		},
-		[resource.id, resource.title, shareUrl],
-	);
+	const trackShare = (channel: "linkedin" | "twitter" | "copy_link") => {
+		track("resource_shared", {
+			resource_id: resource.id,
+			resource_title: resource.title,
+			channel,
+		});
+	};
+
+	const handleCopyLink = async () => {
+		trackShare("copy_link");
+		try {
+			await navigator.clipboard.writeText(shareUrl);
+			setCopiedLink(true);
+			setTimeout(() => setCopiedLink(false), 2000);
+		} catch {
+			// clipboard unavailable
+		}
+	};
 
 	const isPdfResource = !!resource.pdfUrl;
 
 	return (
 		<>
-			<div
+			<Card
 				id={resource.id}
 				ref={ref}
-				className={`bg-white rounded-xl border border-gray-100 overflow-hidden transition-all duration-500 hover:shadow-lg hover:shadow-teal-500/5 hover:border-teal-100 scroll-mt-32 ${
-					isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-				}`}
+				className={cn(
+					"flex flex-col h-full scroll-mt-32 transition-all duration-500 hover:shadow-lg hover:border-teal-100 border-gray-100 py-0 gap-0",
+					isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+				)}
 			>
-				{/* Card Header */}
-				<div className="p-6 pb-4">
-					<div className="flex items-start justify-between mb-4">
-						<div className="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center flex-shrink-0">
-							<resource.icon className="size-5 text-teal-600" />
+				<CardHeader className="p-6 pb-4">
+					<div className="flex items-center justify-between mb-4">
+						<div className="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center shrink-0">
+							<i className={`${resource.icon} text-xl text-teal-600`} />
 						</div>
 						<div className="flex items-center gap-2">
 							{resource.isNew && (
@@ -180,14 +163,14 @@ export default function ResourceCard({
 						</div>
 					</div>
 
-					<h3 className="text-lg font-bold text-secondary mb-2 leading-snug">
+					<CardTitle className="text-lg font-bold text-secondary leading-snug">
 						{resource.title}
-					</h3>
-					<p className="text-sm text-gray-500 mb-4 leading-relaxed">
+					</CardTitle>
+					<CardDescription className="text-gray-500 leading-relaxed mt-2">
 						{resource.description}
-					</p>
+					</CardDescription>
 
-					<div className="flex items-center gap-4 text-xs text-gray-400 mb-4">
+					<div className="flex items-center gap-4 text-xs text-gray-400 mt-4">
 						<span className="flex items-center gap-1">
 							<Clock className="size-3.5" />
 							{resource.readTime}
@@ -203,58 +186,76 @@ export default function ResourceCard({
 							</span>
 						)}
 					</div>
-				</div>
+				</CardHeader>
 
-				{/* Teaser Content */}
-				<div className="px-6 pb-4">
-					<div className="bg-gray-50 rounded-lg p-4">
-						<p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-							What you will learn
-						</p>
-						<ul className="space-y-2">
-							{resource.teaserContent.map((item, index) => (
-								<li
-									key={index}
-									className="flex items-start gap-2 text-sm text-gray-600"
-								>
-									<Check className="size-4 text-teal-500 mt-0.5 flex-shrink-0" />
-									<span>{item}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-				</div>
-
-				{/* Gated Content Preview (shown when unlocked for text resources) */}
-				{isUnlocked &&
-					showGatedContent &&
-					!isPdfResource &&
-					resource.gatedContent && (
-						<div className="px-6 pb-4">
-							<div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
-								<p className="text-xs font-semibold text-emerald-700 uppercase tracking-wider mb-3 flex items-center gap-2">
-									<LockOpen className="size-3.5" />
-									Full Actionable Content — Unlocked
-								</p>
+				<CardContent className="px-6 pb-4 flex-1 space-y-4">
+					<Accordion
+						type="single"
+						collapsible
+						className="rounded-lg border border-gray-100 bg-gray-50 px-3"
+					>
+						<AccordionItem
+							value="teaser"
+							className="border-0"
+						>
+							<AccordionTrigger className="py-3 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:no-underline hover:text-teal-600 cursor-pointer">
+								What you will learn
+							</AccordionTrigger>
+							<AccordionContent className="pb-3">
 								<ul className="space-y-2">
-									{resource.gatedContent.map((item, index) => (
+									{resource.teaserContent.map((item, index) => (
 										<li
 											key={index}
-											className="flex items-start gap-2 text-sm text-gray-700"
+											className="flex items-start gap-2 text-sm text-gray-600"
 										>
-											<CircleCheck className="size-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+											<Check className="size-4 text-teal-500 mt-0.5 shrink-0" />
 											<span>{item}</span>
 										</li>
 									))}
 								</ul>
-							</div>
-						</div>
-					)}
+							</AccordionContent>
+						</AccordionItem>
+					</Accordion>
 
-				{/* PDF Download Preview (shown when unlocked for PDF resources) */}
-				{isUnlocked && isPdfResource && (
-					<div className="px-6 pb-4">
-						<div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
+					{isUnlocked &&
+						showGatedContent &&
+						!isPdfResource &&
+						resource.gatedContent && (
+							<Accordion
+								type="single"
+								collapsible
+								defaultValue="gated"
+								className="rounded-lg border border-emerald-100 bg-emerald-50 px-3"
+							>
+								<AccordionItem
+									value="gated"
+									className="border-0"
+								>
+									<AccordionTrigger className="py-3 text-xs font-semibold uppercase tracking-wider text-emerald-700 hover:no-underline cursor-pointer">
+										<span className="flex items-center gap-2">
+											<LockOpen className="size-3.5" />
+											Full Actionable Content — Unlocked
+										</span>
+									</AccordionTrigger>
+									<AccordionContent className="pb-3">
+										<ul className="space-y-2">
+											{resource.gatedContent.map((item, index) => (
+												<li
+													key={index}
+													className="flex items-start gap-2 text-sm text-gray-700"
+												>
+													<CircleCheck className="size-4 text-emerald-500 mt-0.5 shrink-0" />
+													<span>{item}</span>
+												</li>
+											))}
+										</ul>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						)}
+
+					{isUnlocked && isPdfResource && (
+						<div className="rounded-lg border border-emerald-100 bg-emerald-50 p-4">
 							<p className="text-xs font-semibold text-emerald-700 uppercase tracking-wider mb-3 flex items-center gap-2">
 								<LockOpen className="size-3.5" />
 								PDF Unlocked — Ready to Download
@@ -263,78 +264,111 @@ export default function ResourceCard({
 								Your PDF is now available. Click below to download or view the
 								full article.
 							</p>
-							<button
+							<Button
 								onClick={handleDownload}
-								className="w-full py-2.5 bg-emerald-500 text-white text-sm font-medium rounded-lg hover:bg-emerald-600 transition-all cursor-pointer flex items-center justify-center gap-2"
+								className="w-full h-auto py-2.5 bg-emerald-500 text-white hover:bg-emerald-600 cursor-pointer"
 							>
 								<Download className="size-4" />
 								Download PDF
-							</button>
+							</Button>
 						</div>
-					</div>
-				)}
+					)}
+				</CardContent>
 
-				{/* View Full Page + Share */}
-				<div className="px-6 pb-3">
-					<div className="flex items-center justify-between mb-3">
-						<button
+				<CardFooter className="flex-col items-stretch gap-4 mt-auto border-0 bg-transparent p-6 pt-0">
+					<div>
+						<Button
+							variant="link"
 							onClick={() => navigate(`/resources/${resource.id}`)}
-							className="text-sm text-teal-600 font-medium hover:text-teal-700 transition-colors cursor-pointer flex items-center gap-1"
+							className="h-auto p-0 text-teal-600 font-medium hover:text-teal-700 cursor-pointer"
 						>
 							View Full Page
 							<ArrowRight className="size-4" />
-						</button>
+						</Button>
+						<div className="flex items-center gap-2 mt-3">
+							<span className="text-xs text-gray-400 mr-1">Share:</span>
+							<Button
+								variant="outline"
+								size="icon"
+								asChild
+								className="size-8 cursor-pointer"
+							>
+								<a
+									href={getShareLink("linkedin")}
+									target="_blank"
+									rel="noopener noreferrer"
+									title="Share on LinkedIn"
+									onClick={() => trackShare("linkedin")}
+								>
+									<i
+										className="ri-linkedin-fill text-base"
+										aria-hidden
+									/>
+								</a>
+							</Button>
+							<Button
+								variant="outline"
+								size="icon"
+								asChild
+								className="size-8 cursor-pointer"
+							>
+								<a
+									href={getShareLink("twitter")}
+									target="_blank"
+									rel="noopener noreferrer"
+									title="Share on X/Twitter"
+									onClick={() => trackShare("twitter")}
+								>
+									<i
+										className="ri-twitter-x-fill text-base"
+										aria-hidden
+									/>
+								</a>
+							</Button>
+							<Button
+								variant="outline"
+								size="icon"
+								asChild
+								className="size-8 cursor-pointer relative"
+							>
+								<a
+									href={getShareLink("copy_link")}
+									title="Copy direct link"
+									onClick={(e) => {
+										e.preventDefault();
+										handleCopyLink();
+									}}
+								>
+									<i
+										className={cn(
+											"text-base",
+											copiedLink ? "ri-check-line" : "ri-link",
+										)}
+										aria-hidden
+									/>
+									{copiedLink && (
+										<span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap pointer-events-none">
+											Copied!
+										</span>
+									)}
+								</a>
+							</Button>
+						</div>
 					</div>
-					<div className="flex items-center gap-2">
-						<span className="text-xs text-gray-400 mr-1">Share:</span>
-						<button
-							onClick={() => handleShare("linkedin")}
-							className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-100 text-gray-600 hover:bg-[#0077b5] hover:text-white transition-all cursor-pointer"
-							title="Share on LinkedIn"
-						>
-							<LinkedInIcon className="size-4" />
-						</button>
-						<button
-							onClick={() => handleShare("twitter")}
-							className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-100 text-gray-600 hover:bg-black hover:text-white transition-all cursor-pointer"
-							title="Share on X/Twitter"
-						>
-							<XIcon className="size-3.5" />
-						</button>
-						<button
-							onClick={() => handleShare("copy_link")}
-							className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-100 text-gray-600 hover:bg-teal-500 hover:text-white transition-all cursor-pointer relative"
-							title="Copy direct link"
-						>
-							{copiedLink ? (
-								<Check className="size-4" />
-							) : (
-								<Link className="size-4" />
-							)}
-							{copiedLink && (
-								<span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap">
-									Copied!
-								</span>
-							)}
-						</button>
-					</div>
-				</div>
 
-				{/* Action Button */}
-				<div className="px-6 pb-6">
 					{isUnlocked ? (
 						isPdfResource ? (
-							<button
+							<Button
 								onClick={handleDownload}
-								className="w-full py-3 bg-emerald-500 text-white text-sm font-medium rounded-lg hover:bg-emerald-600 transition-all cursor-pointer flex items-center justify-center gap-2"
+								className="w-full h-auto py-3 bg-emerald-500 text-white hover:bg-emerald-600 cursor-pointer"
 							>
 								<Download className="size-4" />
 								Download PDF
-							</button>
+							</Button>
 						) : (
-							<button
+							<Button
 								onClick={() => setShowGatedContent(!showGatedContent)}
-								className="w-full py-3 bg-emerald-500 text-white text-sm font-medium rounded-lg hover:bg-emerald-600 transition-all cursor-pointer flex items-center justify-center gap-2"
+								className="w-full h-auto py-3 bg-emerald-500 text-white hover:bg-emerald-600 cursor-pointer"
 							>
 								{showGatedContent ? (
 									<EyeOff className="size-4" />
@@ -342,20 +376,20 @@ export default function ResourceCard({
 									<Eye className="size-4" />
 								)}
 								{showGatedContent ? "Hide Full Content" : "View Full Content"}
-							</button>
+							</Button>
 						)
 					) : (
-						<button
+						<Button
 							onClick={() => setIsModalOpen(true)}
-							className="w-full py-3 bg-teal-500 text-white text-sm font-medium rounded-lg hover:bg-teal-600 transition-all cursor-pointer flex items-center justify-center gap-2 group"
+							className="w-full h-auto py-3 bg-teal-500 text-white hover:bg-teal-600 cursor-pointer group"
 						>
 							<Lock className="size-4 group-hover:hidden" />
 							<LockOpen className="size-4 hidden group-hover:inline" />
 							{isPdfResource ? "Unlock PDF Download" : "Unlock Full Guide"}
-						</button>
+						</Button>
 					)}
-				</div>
-			</div>
+				</CardFooter>
+			</Card>
 
 			<EmailGateModal
 				isOpen={isModalOpen}
