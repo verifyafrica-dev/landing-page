@@ -88,17 +88,16 @@ export default function FAQ() {
 						))}
 					</Accordion>
 
-					<div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
-						<p className="text-sm sm:text-base text-gray-500 font-medium">
-							Still have questions?{" "}
-							<Link
-								to="/contact"
-								className="text-secondary underline underline-offset-4 hover:text-secondary/80 transition-colors font-semibold"
-							>
-								Contact us
-							</Link>
-						</p>
-					</div>
+					<p className="text-sm sm:text-base text-gray-500 font-medium text-center pt-10 sm:pt-12">
+						Still have questions?{" "}
+						<Link
+							to="/contact"
+							className="text-teal-600 font-semibold hover:text-teal-700 transition-colors relative group"
+						>
+							<span>Contact us</span>
+							<span className="absolute -bottom-0.75 left-0 w-0 h-0.5 bg-teal-600 group-hover:w-full transition-all duration-300"></span>
+						</Link>
+					</p>
 				</div>
 			</div>
 		</section>

@@ -186,8 +186,8 @@ export default function Pricing() {
 							: "opacity-0 translate-y-6"
 					}`}
 				>
-					<p className="text-xs sm:text-sm text-gray-600">
-						Need a custom plan?{" "}
+					<p className="text-sm sm:text-base text-gray-500 font-medium text-center pt-10 sm:pt-12">
+						Still have questions?{" "}
 						<Link
 							to="/contact"
 							className="text-teal-600 font-semibold hover:text-teal-700 transition-colors relative group"
