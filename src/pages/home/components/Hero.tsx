@@ -79,7 +79,7 @@ export default function Hero({ onRequestDemo }: HeroProps) {
   }, [isDesktop]);
 
   return (
-    <section className="relative min-h-[100svh] min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-[100svh] min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
       {/* Background Image with Parallax — DOM-driven, zero React re-renders */}
       <div
         ref={parallaxRef}
@@ -121,7 +121,7 @@ export default function Hero({ onRequestDemo }: HeroProps) {
           />
         </picture>
         {/* Fallback background color while image loads */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 -z-10" />
+        <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-teal-950 to-slate-900" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/65"></div>
         <div className="absolute inset-0 bg-gradient-to-tr from-teal-900/20 via-transparent to-cyan-900/20"></div>
 

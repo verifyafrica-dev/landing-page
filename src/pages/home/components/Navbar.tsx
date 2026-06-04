@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { smoothScrollTo } from "../../../hooks/useScrollAnimation";
 import { HoverUnderline } from "@/components/ui/hover-underline";
+import { Button } from "@/components/ui/button";
+import { LOGO_TEXT_COLOR, LogoIcon } from "@/components/icons/brand/logo";
 
 interface NavbarProps {
 	onRequestDemo: () => void;
@@ -23,7 +25,7 @@ export default function HomeNavbar({ onRequestDemo }: NavbarProps) {
 	useEffect(() => {
 		setTimeout(() => setIsVisible(true), 100);
 		const handleScroll = () => setIsScrolled(window.scrollY > 20);
-		window.addEventListener("scroll", handleScroll);
+		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
@@ -35,7 +37,8 @@ export default function HomeNavbar({ onRequestDemo }: NavbarProps) {
 		};
 	}, [isMobileMenuOpen]);
 
-	const showSolidBg = isScrolled || isMobileMenuOpen;
+	const showSolidBg = isScrolled;
+	const isTransparentNav = !isScrolled;
 
 	const handleHashClick = (
 		e: React.MouseEvent<HTMLAnchorElement>,
@@ -76,7 +79,7 @@ export default function HomeNavbar({ onRequestDemo }: NavbarProps) {
 				className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
 					showSolidBg
 						? "bg-white/95 backdrop-blur-md shadow-lg shadow-black/5"
-						: "bg-transparent"
+						: "bg-transparent shadow-none"
 				} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
 			>
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
@@ -84,13 +87,13 @@ export default function HomeNavbar({ onRequestDemo }: NavbarProps) {
 						{/* Logo */}
 						<Link
 							to="/"
-							className="flex items-center group flex-shrink-0"
+							className="flex items-center group shrink-0"
 						>
-							<img
-								src="/assets/brand/logo.svg"
-								alt="VerifyAfrica"
-								title="VerifyAfrica – KYC, AML &amp; Identity Verification Platform for Africa"
+							<LogoIcon
+								textColor={isTransparentNav ? "#FFFFFF" : LOGO_TEXT_COLOR}
 								className="h-12 sm:h-18 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+								aria-label="VerifyAfrica – KYC, AML & Identity Verification Platform for Africa"
+								role="img"
 							/>
 						</Link>
 
@@ -179,36 +182,39 @@ export default function HomeNavbar({ onRequestDemo }: NavbarProps) {
 							>
 								Explore Dashboard
 							</a>
-							<button
+							<Button
 								onClick={onRequestDemo}
-								className="group relative px-5 py-2.5 bg-teal-500 text-white text-sm font-medium rounded-lg overflow-hidden transition-all whitespace-nowrap cursor-pointer hover:shadow-lg hover:shadow-teal-500/30"
+								className="group relative h-auto px-5 py-2.5 bg-teal-500 text-white hover:bg-teal-500/90 hover:shadow-lg hover:shadow-teal-500/30 cursor-pointer overflow-hidden"
 							>
-								<span className="absolute inset-0 bg-gradient-to-r from-teal-400 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+								<span className="absolute inset-0 bg-linear-to-r from-teal-400 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 								<span className="relative z-10">Request Demo</span>
-							</button>
+							</Button>
 						</div>
 
 						{/* Mobile right-side controls */}
 						<div className="flex lg:hidden items-center gap-2">
-							<button
+							<Button
 								onClick={onRequestDemo}
-								className="px-3 py-1.5 sm:px-4 sm:py-2 bg-teal-500 text-white text-xs sm:text-sm font-medium rounded-lg whitespace-nowrap cursor-pointer"
+								size="sm"
+								className="h-auto px-3 py-1.5 sm:px-4 sm:py-2 bg-teal-500 text-white hover:bg-teal-600 text-xs sm:text-sm cursor-pointer"
 							>
 								Demo
-							</button>
-							<button
+							</Button>
+							<Button
+								variant="outline"
+								size="icon"
 								onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
 								aria-label="Toggle menu"
-								className={`w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg transition-colors cursor-pointer ${
-									showSolidBg
-										? "text-gray-800 bg-gray-100 hover:bg-gray-200"
-										: "text-white bg-white/20 hover:bg-white/30 border border-white/30 backdrop-blur-sm"
+								className={`size-9 sm:size-10 cursor-pointer ${
+									isTransparentNav
+										? "text-white bg-white/20 hover:bg-white/30 border-white/30 backdrop-blur-sm hover:text-white"
+										: "text-gray-800 bg-gray-100 hover:bg-gray-200 border-transparent"
 								}`}
 							>
 								<i
 									className={`${isMobileMenuOpen ? "ri-close-line" : "ri-menu-line"} text-xl sm:text-2xl`}
 								/>
-							</button>
+							</Button>
 						</div>
 					</div>
 				</div>
@@ -227,12 +233,14 @@ export default function HomeNavbar({ onRequestDemo }: NavbarProps) {
 			{/* Mobile drawer */}
 			<div
 				className={`fixed top-16 sm:top-20 left-0 right-0 bottom-0 bg-white z-40 lg:hidden overflow-y-auto transition-transform duration-300 ease-out ${
-					isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+					isMobileMenuOpen
+						? "translate-y-0 visible"
+						: "-translate-y-full invisible pointer-events-none"
 				}`}
 			>
 				<div className="px-6 py-8 space-y-2">
 					{navItems.map((item) =>
-						item.isExternal ? (
+						item.href.startsWith("http") ? (
 							<a
 								key={item.href}
 								href={item.href}
@@ -264,23 +272,28 @@ export default function HomeNavbar({ onRequestDemo }: NavbarProps) {
 					)}
 
 					<div className="pt-6 mt-4 border-t border-gray-200 space-y-4">
-						<a
-							href="https://dashboard.verifyafrica.io/login"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="block w-full py-3 px-6 text-base font-medium text-gray-700 border border-gray-300 rounded-lg hover:border-teal-400 hover:text-teal-600 transition-all cursor-pointer text-center"
+						<Button
+							variant="outline"
+							asChild
+							className="w-full h-auto py-3 px-6 text-base font-medium text-gray-700 border-gray-300 hover:border-teal-400 hover:text-teal-600 cursor-pointer"
 						>
-							Explore Dashboard
-						</a>
-						<button
+							<a
+								href="https://dashboard.verifyafrica.io/login"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Explore Dashboard
+							</a>
+						</Button>
+						<Button
+							className="w-full h-auto py-3 px-6 bg-teal-500 text-white text-base font-medium hover:bg-teal-600 cursor-pointer"
 							onClick={() => {
 								setIsMobileMenuOpen(false);
 								onRequestDemo();
 							}}
-							className="w-full py-3 px-6 bg-teal-500 text-white text-base font-medium rounded-lg hover:bg-teal-600 transition-all cursor-pointer"
 						>
 							Request Demo
-						</button>
+						</Button>
 					</div>
 				</div>
 			</div>
