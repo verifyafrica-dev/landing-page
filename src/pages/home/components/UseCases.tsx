@@ -252,15 +252,19 @@ export default function UseCases() {
 							: "opacity-0 translate-y-6"
 					}`}
 				>
-					<Link
-						to="/case-studies"
-						className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full border-2 border-secondary text-secondary font-semibold text-sm sm:text-base hover:bg-secondary hover:text-white transition-all duration-300 whitespace-nowrap cursor-pointer"
+					<Button
+						variant="outline"
+						size="lg"
+						asChild
+						className="h-auto gap-2.5 px-7 py-3.5 rounded-full border-2 border-secondary text-secondary font-semibold text-sm sm:text-base hover:bg-secondary hover:text-white cursor-pointer"
 					>
-						View all use cases
-						<span className="w-5 h-5 flex items-center justify-center rounded-full bg-secondary text-white group-hover:bg-white group-hover:text-secondary transition-all duration-300 group-hover:translate-x-1">
-							<i className="ri-arrow-right-line text-xs"></i>
-						</span>
-					</Link>
+						<Link to="/case-studies">
+							View all use cases
+							<span className="w-5 h-5 flex items-center justify-center rounded-full bg-secondary text-white group-hover/button:bg-white group-hover/button:text-secondary transition-all duration-300 group-hover/button:translate-x-1">
+								<i className="ri-arrow-right-line text-xs"></i>
+							</span>
+						</Link>
+					</Button>
 				</div>
 			</div>
 		</section>
