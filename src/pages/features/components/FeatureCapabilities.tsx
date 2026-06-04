@@ -41,28 +41,52 @@ export default function FeatureCapabilities({
 					className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
 				>
 					{feature.capabilities.map((cap, i) => (
-						<div
-							key={i}
-							className="bg-white rounded-xl p-6 border border-gray-100 hover:border-teal-200 transition-all duration-300 group"
-							style={{
-								opacity: gridVisible ? 1 : 0,
-								transform: gridVisible ? "translateY(0)" : "translateY(20px)",
-								transition: `all 0.5s ease-out ${i * 80}ms`,
-							}}
-						>
-							<div className="w-11 h-11 flex items-center justify-center bg-teal-50 rounded-lg mb-4 group-hover:bg-teal-100 transition-colors duration-300">
-								<i className={`${cap.icon} text-xl text-teal-600`} />
-							</div>
-							<h3 className="text-base font-bold text-secondary mb-2 group-hover:text-teal-700 transition-colors duration-300">
-								{cap.title}
-							</h3>
-							<p className="text-sm text-gray-600 leading-relaxed">
-								{cap.description}
-							</p>
-						</div>
+						<FeatureCapabilityCard
+							key={cap.title}
+							icon={cap.icon}
+							title={cap.title}
+							description={cap.description}
+							index={i}
+							isVisible={gridVisible}
+						/>
 					))}
 				</div>
 			</div>
 		</section>
+	);
+}
+
+interface FeatureCapabilityCardProps {
+	icon: string;
+	title: string;
+	description: string;
+	index: number;
+	isVisible: boolean;
+}
+
+function FeatureCapabilityCard({
+	icon,
+	title,
+	description,
+	index,
+	isVisible,
+}: FeatureCapabilityCardProps) {
+	return (
+		<div
+			className="bg-white rounded-xl p-6 border hover:shadow-md transition-all duration-300 group"
+			style={{
+				opacity: isVisible ? 1 : 0,
+				transform: isVisible ? "translateY(0)" : "translateY(20px)",
+				transition: `all 0.5s ease-out ${index * 80}ms`,
+			}}
+		>
+			<div className="w-11 h-11 flex items-center justify-center bg-teal-50 rounded-lg mb-4 group-hover:bg-teal-100 transition-colors duration-300">
+				<i className={`${icon} text-xl text-teal-600`} />
+			</div>
+			<h3 className="text-base font-bold text-secondary mb-2 group-hover:text-teal-700 transition-colors duration-300">
+				{title}
+			</h3>
+			<p className="text-sm text-gray-600 leading-relaxed">{description}</p>
+		</div>
 	);
 }

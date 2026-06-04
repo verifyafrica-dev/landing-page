@@ -68,14 +68,14 @@ export default function FeatureUseCases({ feature }: FeatureUseCasesProps) {
 					{feature.useCases.map((uc, i) => (
 						<div
 							key={i}
-							className="flex gap-5 p-6 bg-gray-50 rounded-xl border border-gray-100 hover:border-teal-200 hover:bg-teal-50/30 transition-all duration-300"
+							className="flex gap-5 p-6 bg-gray-50 rounded-xl border hover:shadow-md transition-all duration-300"
 							style={{
 								opacity: cardsVisible ? 1 : 0,
 								transform: cardsVisible ? "translateY(0)" : "translateY(20px)",
 								transition: `all 0.5s ease-out ${i * 100}ms`,
 							}}
 						>
-							<div className="w-12 h-12 flex items-center justify-center bg-teal-100 rounded-lg flex-shrink-0">
+							<div className="w-12 h-12 flex items-center justify-center bg-teal-100 rounded-lg shrink-0">
 								<i
 									className={`${getIcon(uc.industry)} text-xl text-teal-600`}
 								/>
