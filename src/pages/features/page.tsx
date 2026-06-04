@@ -9,7 +9,7 @@ import FeatureStats from './components/FeatureStats';
 import FeatureHowItWorks from './components/FeatureHowItWorks';
 import FeatureCapabilities from './components/FeatureCapabilities';
 import FeatureUseCases from './components/FeatureUseCases';
-import FeatureFAQ from './components/FeatureFAQ';
+import FAQ from '@/components/feature/FAQ';
 import FeatureCTA from './components/FeatureCTA';
 import FeatureOtherFeatures from './components/FeatureOtherFeatures';
 
@@ -77,7 +77,7 @@ export default function FeaturePage() {
       <FeatureHowItWorks feature={feature} />
       <FeatureCapabilities feature={feature} />
       <FeatureUseCases feature={feature} />
-      <FeatureFAQ feature={feature} />
+      <FAQ faqs={feature.faqs} />
       <FeatureOtherFeatures currentSlug={feature.slug} />
       <FeatureCTA />
       <Suspense fallback={null}>

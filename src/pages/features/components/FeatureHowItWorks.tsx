@@ -1,5 +1,7 @@
+import { Fragment } from "react";
 import type { FeatureDetail } from "@/mocks/featureDetails";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { cn } from "@/lib/utils";
 
 interface FeatureHowItWorksProps {
 	feature: FeatureDetail;
@@ -8,7 +10,7 @@ interface FeatureHowItWorksProps {
 export default function FeatureHowItWorks({ feature }: FeatureHowItWorksProps) {
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 	const { ref: stepsRef, isVisible: stepsVisible } = useScrollAnimation({
-		threshold: 0.1,
+		threshold: 0.12,
 	});
 
 	return (
@@ -35,40 +37,68 @@ export default function FeatureHowItWorks({ feature }: FeatureHowItWorksProps) {
 
 				<div
 					ref={stepsRef}
-					className="relative"
+					className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
 				>
-					{/* Connector line — desktop */}
-					<div className="hidden lg:block absolute top-10 left-[calc(12.5%+1.5rem)] right-[calc(12.5%+1.5rem)] h-0.5 bg-gradient-to-r from-teal-200 via-teal-400 to-teal-200" />
-
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6">
-						{feature.howItWorks.map((step, i) => (
+					{feature.howItWorks.map((step, i) => {
+						const isDark = i % 2 === 1;
+						return (
 							<div
-								key={i}
-								className="relative flex flex-col items-center text-center"
+								key={step.step}
+								className={cn(
+									"group relative rounded-2xl p-6 sm:p-8 overflow-hidden border transition-all duration-500",
+									isDark
+										? "bg-linear-to-br from-secondary to-gray-800 border-white/10 text-white"
+										: "bg-linear-to-br from-teal-50 to-cyan-50 border-teal-100",
+								)}
 								style={{
 									opacity: stepsVisible ? 1 : 0,
 									transform: stepsVisible
 										? "translateY(0)"
-										: "translateY(24px)",
-									transition: `all 0.6s ease-out ${i * 120}ms`,
+										: "translateY(20px)",
+									transition: `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${i * 100}ms`,
 								}}
 							>
-								{/* Step number circle */}
-								<div className="relative z-10 w-20 h-20 flex items-center justify-center bg-white border-2 border-teal-400 rounded-full mb-6 flex-shrink-0">
-									<span className="text-2xl font-bold text-teal-500">
-										{step.step}
+								<Fragment>
+									<span
+										className={cn(
+											"absolute top-4 right-4 text-5xl sm:text-6xl font-bold tabular-nums leading-none select-none",
+											isDark ? "text-white/10" : "text-teal-500/15",
+										)}
+									>
+										{String(step.step).padStart(2, "0")}
 									</span>
-								</div>
-
-								<h3 className="text-base sm:text-lg font-bold text-secondary mb-3">
-									{step.title}
-								</h3>
-								<p className="text-sm text-gray-600 leading-relaxed">
-									{step.description}
-								</p>
+									<div className="relative pt-10">
+										{/* <div
+											className={cn(
+												"w-10 h-10 rounded-lg flex items-center justify-center mb-4 font-bold text-sm",
+												isDark
+													? "bg-teal-500/20 text-teal-300 border border-teal-400/30"
+													: "bg-teal-500 text-white",
+											)}
+										>
+											{step.step}
+										</div> */}
+										<h3
+											className={cn(
+												"text-lg sm:text-xl font-bold mb-3",
+												isDark ? "text-white" : "text-secondary",
+											)}
+										>
+											{step.title}
+										</h3>
+										<p
+											className={cn(
+												"text-sm sm:text-base leading-relaxed",
+												isDark ? "text-gray-300" : "text-gray-600",
+											)}
+										>
+											{step.description}
+										</p>
+									</div>
+								</Fragment>
 							</div>
-						))}
-					</div>
+						);
+					})}
 				</div>
 			</div>
 		</section>
