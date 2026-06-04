@@ -13,6 +13,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import FinalCTA from "@/pages/home/components/FinalCTA";
 
 const CATEGORIES = [
@@ -276,7 +278,7 @@ export default function FeaturesIndexPage() {
 			/>
 
 			{/* Hero */}
-			<section className="pt-32 pb-16 bg-gradient-to-b from-gray-50 to-white overflow-hidden relative">
+			<section className="pt-32 pb-16 bg-linear-to-b from-gray-50 to-white overflow-hidden relative">
 				<div className="absolute inset-0 overflow-hidden pointer-events-none">
 					<div className="absolute -top-24 -right-24 w-96 h-96 bg-teal-100/40 rounded-full blur-3xl" />
 					<div className="absolute top-32 -left-16 w-64 h-64 bg-cyan-100/30 rounded-full blur-3xl" />
@@ -297,18 +299,21 @@ export default function FeaturesIndexPage() {
 							risk.
 						</p>
 						<div className="flex flex-col sm:flex-row gap-3 justify-center">
-							<button
+							<Button
+								size="lg"
 								onClick={openDemo}
-								className="px-7 py-3 bg-teal-500 text-white font-semibold rounded-lg hover:bg-teal-600 transition-all whitespace-nowrap cursor-pointer"
+								className="h-auto px-7 py-3 bg-teal-500 text-white font-semibold hover:bg-teal-600 cursor-pointer"
 							>
 								Request a Demo
-							</button>
-							<Link
-								to="/docs"
-								className="px-7 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:border-teal-400 hover:text-teal-600 transition-all whitespace-nowrap text-center"
+							</Button>
+							<Button
+								variant="outline"
+								size="lg"
+								asChild
+								className="h-auto px-7 py-3 font-semibold hover:border-teal-400 hover:text-teal-600 cursor-pointer"
 							>
-								Read API Docs
-							</Link>
+								<Link to="/docs">Read API Docs</Link>
+							</Button>
 						</div>
 					</div>
 
@@ -342,38 +347,44 @@ export default function FeaturesIndexPage() {
 					<div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
 						{/* Search */}
 						<div className="relative flex-1 min-w-0 w-full sm:max-w-xs">
-							<i className="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-							<input
-								type="text"
+							<i className="ri-search-line pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-muted-foreground" />
+							<Input
+								type="search"
 								placeholder="Search features…"
 								value={search}
 								onChange={(e) => setSearch(e.target.value)}
-								className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent placeholder:text-gray-400"
+								className="h-10 bg-gray-50 pl-9 pr-9"
 							/>
 							{search && (
-								<button
+								<Button
+									type="button"
+									variant="ghost"
+									size="icon"
 									onClick={() => setSearch("")}
-									className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"
+									aria-label="Clear search"
+									className="absolute right-1 top-1/2 size-7 -translate-y-1/2 text-muted-foreground hover:text-foreground"
 								>
 									<i className="ri-close-line text-sm" />
-								</button>
+								</Button>
 							)}
 						</div>
 
 						{/* Category pills */}
 						<div className="flex items-center gap-2 flex-wrap">
 							{CATEGORIES.map((cat) => (
-								<button
+								<Button
 									key={cat.value}
+									type="button"
+									size="sm"
 									onClick={() => setActiveCategory(cat.value)}
-									className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap cursor-pointer transition-all ${
+									className={`h-auto rounded-full px-3 py-1.5 text-xs font-semibold whitespace-nowrap cursor-pointer ${
 										activeCategory === cat.value
-											? "bg-teal-500 text-white"
+											? "bg-teal-500 text-white hover:bg-teal-600"
 											: "bg-gray-100 text-gray-600 hover:bg-teal-50 hover:text-teal-600"
 									}`}
 								>
 									{cat.label}
-								</button>
+								</Button>
 							))}
 						</div>
 
@@ -399,15 +410,15 @@ export default function FeaturesIndexPage() {
 							<p className="text-sm text-gray-400 mb-6">
 								Try a different keyword or clear your filters.
 							</p>
-							<button
+							<Button
 								onClick={() => {
 									setSearch("");
 									setActiveCategory("all");
 								}}
-								className="px-5 py-2 bg-teal-500 text-white text-sm font-medium rounded-lg hover:bg-teal-600 transition-all cursor-pointer"
+								className="bg-teal-500 text-white hover:bg-teal-600 cursor-pointer"
 							>
 								Clear Filters
-							</button>
+							</Button>
 						</div>
 					) : (
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
