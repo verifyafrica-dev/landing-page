@@ -73,7 +73,7 @@ export default function FeatureHero({ feature }: FeatureHeroProps) {
 					<h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter leading-none mb-8">
 						{feature.title}
 					</h1>
-					<p className="text-lg sm:text-xl text-white/70 max-w-2xl leading-relaxed mb-12">
+					<p className="text-lg sm:text-xl text-white max-w-2xl leading-relaxed mb-12">
 						{feature.description}
 					</p>
 					<HeroCTAs className="justify-center" />
