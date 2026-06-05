@@ -1,12 +1,5 @@
 import { ArrowRight, type LucideIcon } from "lucide-react";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+import { Card, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -31,7 +24,6 @@ export default function UseCaseCard({
 	icon: Icon,
 	color,
 	description,
-	useCases,
 	benefits,
 	image,
 	onClick,
@@ -47,82 +39,62 @@ export default function UseCaseCard({
 					onClick();
 				}
 			}}
-			className="group h-full cursor-pointer gap-0 overflow-hidden border bg-white py-0 shadow-none ring-0 transition-all duration-300 hover:shadow-lg"
+			className="group relative h-[400px] cursor-pointer gap-0 overflow-hidden border-0 bg-secondary py-0 shadow-none ring-0 transition-shadow duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
 		>
-			<div className="relative h-44 overflow-hidden">
-				<img
-					src={image}
-					alt={category}
-					className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-				/>
-				<div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/25 to-transparent" />
+			<img
+				src={image}
+				alt={category}
+				className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+			/>
 
-				<div
+			{/* Default — title only */}
+			<div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-secondary/80 via-secondary/20 to-transparent p-6 transition-opacity duration-300 group-hover:opacity-0">
+				<CardTitle className="text-xl font-bold text-white leading-snug">
+					{category}
+				</CardTitle>
+			</div>
+
+			{/* Hover reveal — centered badge + details */}
+			<div className="absolute inset-0 flex translate-y-4 flex-col justify-end bg-secondary/90 p-6 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+				{/* <div
 					className={cn(
-						"absolute top-4 left-4 flex size-11 items-center justify-center rounded-xl bg-linear-to-br shadow-lg",
+						"mb-4 flex size-14 items-center justify-center rounded-2xl bg-linear-to-br shadow-lg",
 						color,
 					)}
 				>
-					<Icon className="size-5 text-white" />
-				</div>
+					<Icon className="size-6 text-white" />
+				</div> */}
 
-				<div className="absolute right-4 bottom-4 left-4">
-					<CardTitle className="text-lg font-bold text-white leading-snug">
-						{category}
-					</CardTitle>
-				</div>
-			</div>
+				<CardTitle className="text-lg font-bold text-white">
+					{category}
+				</CardTitle>
 
-			<CardHeader className="px-5 pt-5 pb-0">
-				<CardDescription className="line-clamp-2 text-sm leading-relaxed text-gray-600">
+				<p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/75">
 					{description}
-				</CardDescription>
-			</CardHeader>
+				</p>
 
-			<CardContent className="flex-1 px-5 pt-4 pb-0">
-				<div className="flex flex-wrap gap-2">
-					{useCases.slice(0, 3).map((useCase) => (
-						<span
-							key={useCase}
-							className="rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-600"
-						>
-							{useCase}
-						</span>
-					))}
-					{useCases.length > 3 && (
-						<span className="rounded-full bg-teal-50 px-2.5 py-1 text-xs font-semibold text-teal-600">
-							+{useCases.length - 3} more
-						</span>
-					)}
-				</div>
-
-				<div className="mt-4 grid grid-cols-3 gap-2 border-t border-gray-100 pt-4">
-					{benefits.slice(0, 3).map((benefit) => (
+				<div className="mt-4 flex gap-3">
+					{benefits.slice(0, 2).map((benefit) => (
 						<div
 							key={benefit.label}
-							className="text-center"
+							className="flex-1 rounded-lg bg-white/10 px-3 py-2"
 						>
-							<div className="text-base font-bold text-teal-600 sm:text-lg">
+							<div className="text-sm font-bold text-teal-300">
 								{benefit.metric}
 							</div>
-							<div className="truncate text-[11px] text-gray-500 sm:text-xs">
-								{benefit.label}
-							</div>
+							<div className="text-[10px] text-white/50">{benefit.label}</div>
 						</div>
 					))}
 				</div>
-			</CardContent>
 
-			<CardFooter className="mt-auto border-0 bg-transparent px-5 pt-4 pb-5">
 				<Button
-					variant="link"
-					className="h-auto w-full justify-between p-0 text-sm font-medium text-teal-600 hover:text-teal-700"
+					className="mt-5 h-auto w-full bg-teal-500 py-2.5 text-white hover:bg-teal-400"
 					tabIndex={-1}
 				>
-					View Details
-					<ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+					Explore solution
+					<ArrowRight className="size-4" />
 				</Button>
-			</CardFooter>
+			</div>
 		</Card>
 	);
 }

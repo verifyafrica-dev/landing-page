@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import { Building2 } from "lucide-react";
 import { useCaseCategories } from "../../../mocks/caseStudies";
 import UseCaseCard from "./UseCaseCard";
-import { USE_CASE_CARD_VARIATIONS } from "./UseCaseCardVariations";
 import UseCaseModal from "./UseCaseModal";
 import { Button } from "@/components/ui/button";
 
@@ -36,8 +35,8 @@ export default function UseCasesGrid({ onRequestDemo }: UseCasesGridProps) {
 
 	return (
 		<section className="py-16 lg:py-24 bg-gray-50">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-				<div className="text-center mb-12">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col gap-16">
+				<div className="text-center">
 					<div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 rounded-full mb-4">
 						<Building2 className="size-4 text-teal-600" />
 						<span className="text-teal-600 text-sm font-medium">
@@ -53,7 +52,7 @@ export default function UseCasesGrid({ onRequestDemo }: UseCasesGridProps) {
 					</p>
 				</div>
 
-				<div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+				{/* <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
 					{industryFilters.map((category) => {
 						const isActive = selectedCategory === category;
 
@@ -73,71 +72,24 @@ export default function UseCasesGrid({ onRequestDemo }: UseCasesGridProps) {
 							</Button>
 						);
 					})}
-				</div>
+				</div> */}
 
 				{filteredUseCases.length > 0 ? (
-					<>
-						{/* Card design variations — one sample card each */}
-						<div className="mb-16 space-y-12">
-							<div className="text-center">
-								<p className="text-xs font-semibold tracking-[0.2em] text-teal-600 uppercase">
-									Design explorations
-								</p>
-								<p className="mt-2 text-sm text-gray-500">
-									Fifteen conversion-focused card layouts — pick one when ready.
-								</p>
-							</div>
-
-							{USE_CASE_CARD_VARIATIONS.map(
-								({ id, label, description, Component }) => {
-									const sample = filteredUseCases[0];
-									const cardProps = {
-										category: sample.category,
-										icon: sample.icon,
-										color: sample.color,
-										description: sample.description,
-										useCases: sample.useCases,
-										benefits: sample.benefits,
-										image: sample.image,
-										onClick: () => handleCardClick(sample),
-									};
-
-									return (
-										<div key={id}>
-											<div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-												<h3 className="text-sm font-bold text-secondary">
-													<span className="mr-2 text-teal-600">
-														0{id}
-													</span>
-													{label}
-												</h3>
-												<p className="text-xs text-gray-500">{description}</p>
-											</div>
-											<div className="mx-auto max-w-sm md:max-w-md lg:max-w-lg">
-												<Component {...cardProps} />
-											</div>
-										</div>
-									);
-								},
-							)}
-						</div>
-
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-							{filteredUseCases.map((useCase) => (
-								<UseCaseCard
-									key={useCase.id}
-									category={useCase.category}
-									icon={useCase.icon}
-									color={useCase.color}
-									description={useCase.description}
-									useCases={useCase.useCases}
-									benefits={useCase.benefits}
-									image={useCase.image}
-									onClick={() => handleCardClick(useCase)}
-								/>
-							))}
-						</div>
-					</>
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+						{filteredUseCases.map((useCase) => (
+							<UseCaseCard
+								key={useCase.id}
+								category={useCase.category}
+								icon={useCase.icon}
+								color={useCase.color}
+								description={useCase.description}
+								useCases={useCase.useCases}
+								benefits={useCase.benefits}
+								image={useCase.image}
+								onClick={() => handleCardClick(useCase)}
+							/>
+						))}
+					</div>
 				) : (
 					<div className="text-center py-16">
 						<Building2 className="mx-auto mb-4 size-12 text-gray-300" />

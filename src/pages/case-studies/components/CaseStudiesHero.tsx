@@ -31,9 +31,7 @@ export default function CaseStudiesHero() {
 					<h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-secondary tracking-tighter leading-none mb-8">
 						Who Needs
 						<br />
-						<span className="text-transparent bg-clip-text bg-linear-to-r from-teal-500 to-cyan-500">
-							VerifyAfrica?
-						</span>
+						VerifyAfrica?
 					</h1>
 
 					<p className="text-lg sm:text-xl text-secondary max-w-3xl mx-auto leading-relaxed mb-12">
