@@ -47,12 +47,12 @@ export default function CaseStudiesHero() {
 						{stats.map((stat, index) => (
 							<div
 								key={index}
-								className="bg-secondary/5 backdrop-blur-sm border border-secondary/10 rounded-2xl p-6"
+								className="bg-secondary/5 backdrop-blur-sm border border-secondary/10 rounded-2xl p-6 flex flex-col gap-1"
 							>
-								<div className="text-3xl sm:text-4xl font-bold text-teal-600 mb-1">
+								<p className="text-3xl sm:text-4xl font-bold text-teal-600">
 									{stat.value}
-								</div>
-								<div className="text-sm text-secondary/60">{stat.label}</div>
+								</p>
+								<p className="text-sm text-secondary/60">{stat.label}</p>
 							</div>
 						))}
 					</div>
