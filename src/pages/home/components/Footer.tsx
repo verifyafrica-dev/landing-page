@@ -24,7 +24,7 @@ const socialLinks: {
 		icon: XLogoIcon,
 	},
 	{
-		href: "https://www.instagram.com/verifyafrica1/",
+		href: "https://www.instagram.com/verifyafrica_official",
 		label: "Instagram",
 		icon: InstagramLogoIcon,
 	},

@@ -92,7 +92,7 @@ const homeSchema = [
 		sameAs: [
 			"https://x.com/V3rifyAfrica",
 			"https://www.linkedin.com/company/verifyafrica",
-			"https://www.instagram.com/verifyafrica1/",
+			"https://www.instagram.com/verifyafrica_official",
 		],
 		contactPoint: [
 			{
