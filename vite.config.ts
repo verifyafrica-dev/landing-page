@@ -82,7 +82,7 @@ export default defineConfig({
   ],
   base,
   build: {
-    sourcemap: true,
+    sourcemap: false,
     outDir: "out",
     // Use esbuild for fast, effective minification (default in Vite 5)
     minify: 'esbuild',
