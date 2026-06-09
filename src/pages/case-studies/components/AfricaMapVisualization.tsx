@@ -191,7 +191,7 @@ export default function AfricaMapVisualization() {
 	const zoomStyle = getZoomTransform();
 
 	return (
-		<section className="py-20 bg-linear-to-b from-gray-50 to-white overflow-hidden">
+		<section className="py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Header */}
 				<div className="text-center mb-12">
@@ -378,11 +378,11 @@ export default function AfricaMapVisualization() {
 							{/* Total Stats */}
 							<div className="mt-6 pt-6 border-t border-gray-100">
 								<div className="grid grid-cols-2 gap-4">
-									<div className="text-center p-4 bg-linear-to-br from-teal-50 to-emerald-50 rounded-xl">
+									<div className="text-center p-4 bg-gradient-to-br from-teal-50 to-emerald-50 rounded-xl">
 										<div className="text-2xl font-bold text-teal-600">54</div>
 										<div className="text-xs text-gray-600">Countries</div>
 									</div>
-									<div className="text-center p-4 bg-linear-to-br from-cyan-50 to-teal-50 rounded-xl">
+									<div className="text-center p-4 bg-gradient-to-br from-cyan-50 to-teal-50 rounded-xl">
 										<div className="text-2xl font-bold text-cyan-600">50+</div>
 										<div className="text-xs text-gray-600">ID Types</div>
 									</div>
@@ -431,7 +431,7 @@ export default function AfricaMapVisualization() {
 					<div className="lg:col-span-2 order-1 lg:order-2">
 						<div
 							ref={mapContainerRef}
-							className="relative bg-linear-to-br from-secondary via-gray-800 to-secondary rounded-3xl p-6 lg:p-8 shadow-2xl overflow-hidden"
+							className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-6 lg:p-8 shadow-2xl overflow-hidden"
 						>
 							{/* Background decorations */}
 							<div className="absolute inset-0 opacity-20">

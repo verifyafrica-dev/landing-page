@@ -40,7 +40,7 @@ function UseCaseCard({
 		>
 			<div className="flex items-center gap-3 mb-3">
 				<div
-					className={`w-9 h-9 flex items-center justify-center rounded-lg bg-linear-to-br ${useCase.iconColor} text-white shrink-0`}
+					className={`w-9 h-9 flex items-center justify-center rounded-lg bg-gradient-to-br ${useCase.iconColor} text-white shrink-0`}
 				>
 					<Icon className="w-4 h-4" />
 				</div>

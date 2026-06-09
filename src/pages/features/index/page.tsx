@@ -411,7 +411,7 @@ const FEATURE_CARD_VARIATION_STYLES: Record<
 	"luminous-ledger": {
 		card: "border border-teal-100 bg-white py-0 shadow-[0_18px_55px_rgba(15,23,42,0.08)] ring-1 ring-teal-50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(20,184,166,0.16)]",
 		overlay:
-			"pointer-events-none absolute left-0 top-0 h-full w-1.5 bg-linear-to-b from-teal-300 via-teal-500 to-secondary",
+			"pointer-events-none absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-teal-300 via-teal-500 to-gray-900",
 		header: "flex flex-col sm:flex-row gap-4 sm:gap-5 px-5 pt-5 pb-0 sm:px-7 sm:pt-7",
 		icon: "rounded-2xl bg-teal-500 text-white shadow-[0_14px_35px_rgba(20,184,166,0.35)] group-hover:bg-secondary",
 		badge: "bg-teal-50 text-teal-700 ring-1 ring-teal-100",
@@ -431,7 +431,7 @@ const FEATURE_CARD_VARIATION_STYLES: Record<
 	"split-signal": {
 		card: "border border-gray-200 bg-white py-0 shadow-[0_16px_45px_rgba(15,23,42,0.07)] ring-0 transition-all duration-300 hover:-translate-y-1 hover:border-teal-300 hover:shadow-[0_24px_70px_rgba(15,23,42,0.12)]",
 		overlay:
-			"pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-teal-50 to-transparent",
+			"pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-teal-50 to-transparent",
 		header: "flex flex-col sm:flex-row gap-4 sm:gap-5 px-5 pt-5 pb-0 sm:px-6 sm:pt-6",
 		icon: "rounded-xl bg-white text-teal-600 shadow-[0_8px_22px_rgba(15,23,42,0.10)] ring-1 ring-teal-200 group-hover:bg-teal-500 group-hover:text-white",
 		badge: "bg-secondary text-white",
@@ -544,7 +544,7 @@ const FEATURE_CARD_VARIATION_STYLES: Record<
 		card: "border border-secondary bg-secondary py-0 shadow-[0_22px_65px_rgba(15,23,42,0.22)] ring-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_85px_rgba(15,23,42,0.30)]",
 		hideIcon: true,
 		overlay:
-			"pointer-events-none absolute left-0 top-0 h-1 w-full bg-linear-to-r from-teal-300 via-teal-500 to-white/20",
+			"pointer-events-none absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-teal-300 via-teal-500 to-white/20",
 		header: "flex flex-col gap-3 px-5 pt-6 pb-0 sm:px-6",
 		icon: "",
 		badge: "bg-teal-400 text-secondary",
@@ -841,7 +841,7 @@ const FEATURE_CARD_VARIATION_STYLES: Record<
 	"proof-ribbon": {
 		card: "rounded-[2.25rem] border border-teal-100 bg-white py-0 shadow-[0_28px_90px_rgba(20,184,166,0.12)] ring-1 ring-white transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_36px_115px_rgba(20,184,166,0.18)]",
 		overlay:
-			"pointer-events-none absolute left-0 right-0 top-1/2 h-24 -translate-y-1/2 bg-linear-to-r from-teal-50 via-teal-100/70 to-transparent",
+			"pointer-events-none absolute left-0 right-0 top-1/2 h-24 -translate-y-1/2 bg-gradient-to-r from-teal-50 via-teal-100/70 to-transparent",
 		layout: "proofRibbon",
 		header: "",
 		icon: "rounded-2xl bg-white text-teal-600 shadow-sm ring-1 ring-teal-100 group-hover:bg-secondary group-hover:text-white",
@@ -1221,7 +1221,7 @@ function FeatureIndexCard({
 			className={`group relative gap-0 overflow-hidden ${variant.card} ${colors.borderHover}`}
 		>
 			{variant.overlay && <div className={variant.overlay} />}
-			{/* <div className={`h-1.5 w-full bg-linear-to-r ${colors.band}`} /> */}
+			{/* <div className={`h-1.5 w-full bg-gradient-to-r ${colors.band}`} /> */}
 			<Link
 				to={`/features/${feature.slug}`}
 				className="relative z-10 flex h-full flex-col cursor-pointer"

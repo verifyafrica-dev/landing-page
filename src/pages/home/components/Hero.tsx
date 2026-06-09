@@ -44,7 +44,7 @@ export default function Hero({
 				</div>
 			</div>
 
-			<div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/70 pointer-events-none" />
+			<div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70 pointer-events-none" />
 
 			<HeroContent onRequestDemo={onRequestDemo} />
 

@@ -48,7 +48,7 @@ export default function UseCaseCard({
 			/>
 
 			{/* Default — title only */}
-			<div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-secondary/80 via-secondary/20 to-transparent p-6 transition-opacity duration-300 group-hover:opacity-0">
+			<div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent p-6 transition-opacity duration-300 group-hover:opacity-0">
 				<CardTitle className="text-xl font-bold text-white leading-snug">
 					{category}
 				</CardTitle>
@@ -58,7 +58,7 @@ export default function UseCaseCard({
 			<div className="absolute inset-0 flex translate-y-4 flex-col justify-end bg-secondary/90 p-6 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
 				{/* <div
 					className={cn(
-						"mb-4 flex size-14 items-center justify-center rounded-2xl bg-linear-to-br shadow-lg",
+						"mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg",
 						color,
 					)}
 				>

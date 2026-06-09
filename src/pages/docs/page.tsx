@@ -190,7 +190,7 @@ export default function DocsPage() {
 				variant="solid"
 			/>
 
-			<section className="bg-linear-to-r from-secondary to-gray-800 pt-28 pb-12">
+			<section className="bg-gradient-to-r from-gray-900 to-gray-800 pt-28 pb-12">
 				<div className="max-w-7xl mx-auto px-6 lg:px-12">
 					<h1 className="text-3xl lg:text-4xl font-bold text-white mb-3">
 						API Documentation

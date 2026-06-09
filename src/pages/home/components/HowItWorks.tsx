@@ -102,7 +102,7 @@ export interface HowItWorksCardProps {
 
 const variantStyles = {
 	light: {
-		card: "bg-linear-to-br from-teal-50 to-cyan-50 border border-teal-100",
+		card: "bg-gradient-to-br from-teal-50 to-cyan-50 border border-teal-100",
 		hiddenRotate: "-rotate-1",
 		iconHoverRotate: "group-hover:rotate-6",
 		title: "text-secondary group-hover:text-teal-700",
@@ -111,7 +111,7 @@ const variantStyles = {
 		linkUnderline: "bg-teal-600",
 	},
 	dark: {
-		card: "bg-linear-to-br from-secondary to-gray-800 text-white",
+		card: "bg-gradient-to-br from-gray-900 to-gray-800 text-white",
 		hiddenRotate: "rotate-1",
 		iconHoverRotate: "group-hover:-rotate-6",
 		title: "group-hover:text-teal-300",
@@ -156,7 +156,7 @@ function HowItWorksCard({
 						{[...Array(8)].map((_, i) => (
 							<div
 								key={i}
-								className="absolute h-px bg-linear-to-r from-transparent via-teal-400 to-transparent"
+								className="absolute h-px bg-gradient-to-r from-transparent via-teal-400 to-transparent"
 								style={{
 									top: `${15 + i * 12}%`,
 									left: "10%",

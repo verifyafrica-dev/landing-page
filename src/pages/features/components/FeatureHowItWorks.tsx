@@ -47,8 +47,8 @@ export default function FeatureHowItWorks({ feature }: FeatureHowItWorksProps) {
 								className={cn(
 									"group relative rounded-2xl p-6 sm:p-8 overflow-hidden border transition-all duration-500",
 									isDark
-										? "bg-linear-to-br from-secondary to-gray-800 border-white/10 text-white"
-										: "bg-linear-to-br from-teal-50 to-cyan-50 border-teal-100",
+										? "bg-gradient-to-br from-gray-900 to-gray-800 border-white/10 text-white"
+										: "bg-gradient-to-br from-teal-50 to-cyan-50 border-teal-100",
 								)}
 								style={{
 									opacity: stepsVisible ? 1 : 0,

@@ -91,7 +91,7 @@ export default function Pricing() {
 						const Icon = plan.icon;
 						const cardClasses = `flex flex-col border-2 overflow-visible relative ring-0 ${
 							plan.highlight
-								? "border-teal-500 bg-linear-to-br from-teal-50 via-white to-secondary/5 shadow-lg shadow-teal-500/10"
+								? "border-teal-500 bg-gradient-to-br from-teal-50 via-white to-gray-900/5 shadow-lg shadow-teal-500/10"
 								: "border-gray-200 hover:border-secondary/30 transition-colors"
 						}`;
 

@@ -199,7 +199,7 @@ export default function ResourceDetailPage() {
 			/>
 
 			{/* Hero Section */}
-			<section className="pt-32 pb-12 md:pt-40 md:pb-16 bg-linear-to-br from-teal-50 via-emerald-50 to-white">
+			<section className="pt-32 pb-12 md:pt-40 md:pb-16 bg-gradient-to-br from-teal-50 via-emerald-50 to-white">
 				<div className="max-w-4xl mx-auto px-6">
 					<div className="flex items-start gap-4 mb-6">
 						<div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center shrink-0">
@@ -360,7 +360,7 @@ export default function ResourceDetailPage() {
 									</div>
 								)
 							) : (
-								<div className="bg-linear-to-br from-teal-50 to-emerald-50 rounded-xl border border-teal-100 p-6 md:p-8">
+								<div className="bg-gradient-to-br from-teal-50 to-emerald-50 rounded-xl border border-teal-100 p-6 md:p-8">
 									<div className="flex items-center gap-3 mb-4">
 										<div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
 											<LockIcon className="text-2xl text-teal-600" />

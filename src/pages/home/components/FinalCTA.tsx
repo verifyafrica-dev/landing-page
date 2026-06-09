@@ -22,7 +22,7 @@ function DashboardPreview() {
 			className="relative mx-auto w-full max-w-lg lg:max-w-none h-[280px] sm:h-[320px] lg:h-[380px] select-none pointer-events-none"
 			aria-hidden
 		>
-			<div className="absolute inset-0 bg-linear-to-l from-white via-transparent to-transparent z-10" />
+			<div className="absolute inset-0 bg-gradient-to-l from-white via-transparent to-transparent z-10" />
 
 			<div className="absolute inset-0 flex items-center justify-center lg:justify-end lg:pr-4">
 				<div

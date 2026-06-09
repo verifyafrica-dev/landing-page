@@ -84,7 +84,7 @@ export default function UseCaseModal({
 						<div className="flex items-end gap-5">
 							<div
 								className={cn(
-									"flex size-14 shrink-0 items-center justify-center rounded-xl bg-linear-to-br shadow-sm",
+									"flex size-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-sm",
 									useCase.color,
 								)}
 							>

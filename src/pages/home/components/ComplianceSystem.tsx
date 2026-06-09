@@ -17,7 +17,7 @@ export default function ComplianceSystem() {
 	return (
 		<section
 			ref={ref}
-			className="py-12 sm:py-16 lg:py-24 bg-linear-to-br from-secondary to-gray-800 text-white overflow-hidden"
+			className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-900 to-gray-800 text-white overflow-hidden"
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 lg:gap-16 items-center">
