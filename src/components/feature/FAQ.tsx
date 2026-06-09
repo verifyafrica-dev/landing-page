@@ -66,7 +66,7 @@ export default function FAQ({
 								value={`item-${index}`}
 								className="border-b border-gray-200"
 							>
-								<AccordionTrigger className="py-5 sm:py-6 text-base sm:text-lg font-semibold text-secondary hover:no-underline items-center gap-4 **:data-[slot=accordion-trigger-icon]:hidden cursor-pointer">
+								<AccordionTrigger className="py-5 sm:py-6 text-base sm:text-lg font-semibold text-secondary hover:no-underline items-center gap-4 [&_[data-slot=accordion-trigger-icon]]:hidden cursor-pointer">
 									<span className="text-left flex-1">{faq.question}</span>
 									<Plus className="size-4 shrink-0 text-gray-400 transition-transform duration-300 ease-out group-data-[state=open]/accordion-trigger:rotate-45" />
 								</AccordionTrigger>
