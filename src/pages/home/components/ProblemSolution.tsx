@@ -1,4 +1,4 @@
-import { ShieldCheckIcon, WarningIcon } from "@phosphor-icons/react";
+import { ShieldCheckIcon } from "@phosphor-icons/react";
 import { useScrollAnimation } from "../../../hooks/useScrollAnimation";
 
 const problemParagraphs = [
@@ -29,7 +29,7 @@ export default function ProblemSolution() {
 			ref={headerRef}
 			className="py-12 sm:py-16 lg:py-24 bg-black text-white overflow-hidden"
 		>
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
 				<div
 					className={`text-center mb-10 sm:mb-14 lg:mb-16 transition-all duration-700 ease-out ${
 						headerVisible
@@ -47,64 +47,67 @@ export default function ProblemSolution() {
 
 				<div
 					ref={panelRef}
-					className={`rounded-2xl sm:rounded-3xl bg-zinc-900 border border-white/10 overflow-hidden transition-all duration-700 ease-out delay-150 ${
-						panelVisible
-							? "opacity-100 translate-y-0"
-							: "opacity-0 translate-y-10"
-					}`}
+					className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8"
 				>
-					<div className="grid grid-cols-1 md:grid-cols-2">
-						<div
-							className="flex flex-col p-6 sm:p-8 lg:p-10 min-h-[320px] border-b md:border-b-0 md:border-r border-white/10"
-							style={{
-								opacity: panelVisible ? 1 : 0,
-								transform: panelVisible ? "translateY(0)" : "translateY(20px)",
-								transition: "all 0.5s ease-out 250ms",
-							}}
-						>
-							<h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">
-								The Problem
-							</h3>
-							<div className="space-y-4 text-sm sm:text-[0.9375rem] text-zinc-400 leading-relaxed flex-1 font-medium">
-								{problemParagraphs.map((paragraph) => (
-									<p key={paragraph.slice(0, 32)}>{paragraph}</p>
-								))}
-							</div>
-							<div className="mt-8 sm:mt-10 pt-4">
-								<WarningIcon
-									className="w-10 h-10 sm:w-12 sm:h-12 text-red-400/90 stroke-[1.25]"
-									aria-hidden
-								/>
-							</div>
-						</div>
+					<div
+						className={`lg:col-span-2 bg-gradient-to-br from-red-900 to-red-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 text-white transition-all duration-700 ease-out ${
+							panelVisible
+								? "opacity-100 translate-x-0"
+								: "opacity-0 -translate-x-16"
+						}`}
+					>
+						<h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+							The Problem
+						</h2>
+						{problemParagraphs.map((paragraph, index) => (
+							<p
+								key={paragraph.slice(0, 32)}
+								className={`text-red-100 leading-relaxed text-sm sm:text-base${
+									index > 0 ? " mt-4" : ""
+								}`}
+							>
+								{paragraph}
+							</p>
+						))}
+					</div>
 
-						<div
-							className="flex flex-col p-6 sm:p-8 lg:p-10 min-h-[320px]"
-							style={{
-								opacity: panelVisible ? 1 : 0,
-								transform: panelVisible ? "translateY(0)" : "translateY(20px)",
-								transition: "all 0.5s ease-out 370ms",
-							}}
-						>
-							<h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">
+					<div
+						className={`lg:col-span-3 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 border border-teal-100 transition-all duration-700 ease-out delay-200 flex flex-col justify-between ${
+							panelVisible
+								? "opacity-100 translate-x-0"
+								: "opacity-0 translate-x-16"
+						}`}
+					>
+						<div>
+							<h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-900">
 								The VerifyAfrica Solution
-							</h3>
-							<div className="space-y-4 text-sm sm:text-[0.9375rem] text-zinc-400 leading-relaxed flex-1 font-medium">
-								{solutionParagraphs.map((paragraph) => (
-									<p key={paragraph.slice(0, 32)}>{paragraph}</p>
-								))}
-							</div>
-							<div className="mt-8 sm:mt-10 pt-4 border-t border-white/10">
-								<div className="flex items-start gap-3">
-									<ShieldCheckIcon
-										className="w-10 h-10 sm:w-12 sm:h-12 text-teal-400 stroke-[1.25] shrink-0"
-										aria-hidden
-									/>
-									<p className="text-xs sm:text-sm text-zinc-500 leading-relaxed pt-1 font-medium">
-										{solutionHighlight}
-									</p>
-								</div>
-							</div>
+							</h2>
+							{solutionParagraphs.map((paragraph, index) => (
+								<p
+									key={paragraph.slice(0, 32)}
+									className={`text-gray-700 leading-relaxed text-sm sm:text-base${
+										index > 0 ? " mt-4" : ""
+									}`}
+								>
+									{paragraph}
+								</p>
+							))}
+						</div>
+						<div
+							className={`mt-6 sm:mt-8 flex items-start gap-3 transition-all duration-500 delay-500 ${
+								panelVisible
+									? "opacity-100 translate-y-0"
+									: "opacity-0 translate-y-4"
+							}`}
+						>
+							<ShieldCheckIcon
+								className="w-6 h-6 sm:w-8 sm:h-8 text-teal-500 shrink-0"
+								weight="fill"
+								aria-hidden
+							/>
+							<p className="text-gray-600 text-xs sm:text-sm leading-relaxed flex-1">
+								{solutionHighlight}
+							</p>
 						</div>
 					</div>
 				</div>
