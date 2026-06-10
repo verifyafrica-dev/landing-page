@@ -4,6 +4,12 @@ import { featureDetails } from "@/mocks/featureDetails";
 import { useDemoModal } from "@/hooks/useDemoModal";
 import Navbar from "@/pages/home/components/Navbar";
 import SEOHead from "@/components/feature/SEOHead";
+import { DEFAULT_OG_IMAGE } from "@/constants/seo";
+import {
+	createBreadcrumbList,
+	createFaqSchema,
+	createWebPageSchema,
+} from "@/lib/schema";
 import FeatureHero from "./components/FeatureHero";
 import FeatureStats from "./components/FeatureStats";
 import FeatureHowItWorks from "./components/FeatureHowItWorks";
@@ -14,8 +20,6 @@ import FinalCTA from "@/pages/home/components/FinalCTA";
 import FeatureOtherFeatures from "./components/FeatureOtherFeatures";
 
 const Footer = lazy(() => import("@/pages/home/components/Footer"));
-
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://verifyafrica.io";
 
 export default function FeaturePage() {
 	const { slug } = useParams<{ slug: string }>();
@@ -32,47 +36,25 @@ export default function FeaturePage() {
 		);
 	}
 
+	const featurePath = `/features/${feature.slug}`;
+
 	const schema = [
-		{
-			"@context": "https://schema.org",
-			"@type": "WebPage",
-			"@id": `${SITE_URL}/features/${feature.slug}#webpage`,
+		createWebPageSchema({
+			path: featurePath,
 			name: `${feature.title} – VerifyAfrica`,
-			url: `${SITE_URL}/features/${feature.slug}`,
 			description: feature.description,
-			inLanguage: "en",
-			isPartOf: { "@id": `${SITE_URL}/#website` },
-			breadcrumb: {
-				"@type": "BreadcrumbList",
-				itemListElement: [
-					{ "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-					{
-						"@type": "ListItem",
-						position: 2,
-						name: "Features",
-						item: `${SITE_URL}/#features`,
-					},
-					{
-						"@type": "ListItem",
-						position: 3,
-						name: feature.title,
-						item: `${SITE_URL}/features/${feature.slug}`,
-					},
-				],
-			},
-		},
-		{
-			"@context": "https://schema.org",
-			"@type": "FAQPage",
-			mainEntity: feature.faqs.map((faq) => ({
-				"@type": "Question",
-				name: faq.question,
-				acceptedAnswer: {
-					"@type": "Answer",
-					text: faq.answer,
-				},
+		}),
+		createBreadcrumbList(featurePath, [
+			{ name: "Home", path: "/" },
+			{ name: "Features", path: "/features" },
+			{ name: feature.title, path: featurePath },
+		]),
+		createFaqSchema(
+			feature.faqs.map((faq) => ({
+				question: faq.question,
+				answer: faq.answer,
 			})),
-		},
+		),
 	];
 
 	return (
@@ -80,11 +62,18 @@ export default function FeaturePage() {
 			<SEOHead
 				title={`${feature.title} – VerifyAfrica | KYC & Compliance for Africa`}
 				description={feature.description}
+				ogDescription={feature.description}
 				keywords={`${feature.title.toLowerCase()}, KYC Africa, compliance Africa, VerifyAfrica`}
-				canonical={`/features/${feature.slug}`}
-				image={feature.heroImage}
+				canonical={featurePath}
+				image={feature.heroImage ?? DEFAULT_OG_IMAGE.image}
 				imageAlt={`${feature.title} – VerifyAfrica`}
 				twitterCard="summary_large_image"
+				{...(feature.heroImage
+					? {}
+					: {
+							imageWidth: DEFAULT_OG_IMAGE.imageWidth,
+							imageHeight: DEFAULT_OG_IMAGE.imageHeight,
+						})}
 				schema={schema}
 			/>
 			<Navbar onRequestDemo={openDemo} />

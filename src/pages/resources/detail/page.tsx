@@ -3,6 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDemoModal } from "../../../hooks/useDemoModal";
 import Navbar from "@/pages/home/components/Navbar";
 import SEOHead from "../../../components/feature/SEOHead";
+import { DEFAULT_OG_IMAGE } from "@/constants/seo";
+import {
+	createBreadcrumbList,
+	pageUrl,
+	SCHEMA_IDS,
+} from "@/lib/schema";
 import BackToTop from "../../../components/feature/BackToTop";
 import EmailGateModal from "../components/EmailGateModal";
 import { track } from "../../../lib/analytics";
@@ -25,8 +31,6 @@ import {
 } from "@phosphor-icons/react";
 
 const Footer = lazy(() => import("@/pages/home/components/Footer"));
-
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://verifyafrica.io";
 
 export default function ResourceDetailPage() {
 	const { id } = useParams<{ id: string }>();
@@ -80,7 +84,8 @@ export default function ResourceDetailPage() {
 	}
 
 	const isPdfResource = !!resource.pdfUrl;
-	const pageUrl = `${SITE_URL}/resources/${resource.id}`;
+	const resourcePath = `/resources/${resource.id}`;
+	const resourceUrl = pageUrl(resourcePath);
 
 	const handleUnlock = (resourceId: string, email: string) => {
 		const domain = email.split("@")[1] || "unknown";
@@ -121,7 +126,7 @@ export default function ResourceDetailPage() {
 		const text = encodeURIComponent(
 			`Check out this free compliance resource: ${resource.title}`,
 		);
-		const url = encodeURIComponent(pageUrl);
+		const url = encodeURIComponent(resourceUrl);
 
 		if (channel === "linkedin") {
 			window.open(
@@ -136,7 +141,7 @@ export default function ResourceDetailPage() {
 				"noopener,noreferrer",
 			);
 		} else if (channel === "copy_link") {
-			navigator.clipboard.writeText(pageUrl).then(() => {
+			navigator.clipboard.writeText(resourceUrl).then(() => {
 				setCopiedLink(true);
 				setTimeout(() => setCopiedLink(false), 2000);
 			});
@@ -147,39 +152,24 @@ export default function ResourceDetailPage() {
 		{
 			"@context": "https://schema.org",
 			"@type": "Article",
-			"@id": `${pageUrl}#article`,
+			"@id": `${resourceUrl}#article`,
 			headline: resource.title,
 			description: resource.description,
-			url: pageUrl,
+			url: resourceUrl,
 			inLanguage: "en",
-			isPartOf: { "@id": `${SITE_URL}/#website` },
-			about: { "@id": `${SITE_URL}/#organization` },
+			isPartOf: { "@id": SCHEMA_IDS.website },
+			about: { "@id": SCHEMA_IDS.organization },
 			dateModified:
 				resource.dateAdded || new Date().toISOString().split("T")[0],
-			publisher: { "@id": `${SITE_URL}/#organization` },
-			author: { "@type": "Organization", name: "VerifyAfrica", url: SITE_URL },
-			mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+			publisher: { "@id": SCHEMA_IDS.organization },
+			author: { "@id": SCHEMA_IDS.organization },
+			mainEntityOfPage: { "@type": "WebPage", "@id": resourceUrl },
 		},
-		{
-			"@context": "https://schema.org",
-			"@type": "BreadcrumbList",
-			"@id": `${pageUrl}#breadcrumb`,
-			itemListElement: [
-				{ "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-				{
-					"@type": "ListItem",
-					position: 2,
-					name: "Resources",
-					item: `${SITE_URL}/resources`,
-				},
-				{
-					"@type": "ListItem",
-					position: 3,
-					name: resource.title,
-					item: pageUrl,
-				},
-			],
-		},
+		createBreadcrumbList(resourcePath, [
+			{ name: "Home", path: "/" },
+			{ name: "Resources", path: "/resources" },
+			{ name: resource.title, path: resourcePath },
+		]),
 	];
 
 	return (
@@ -187,12 +177,12 @@ export default function ResourceDetailPage() {
 			<SEOHead
 				title={`${resource.title} | VerifyAfrica Resources`}
 				description={resource.description}
+				ogDescription={resource.description}
 				keywords={`${resource.title.toLowerCase()}, compliance resource africa, ${resource.category.toLowerCase()}, african fintech compliance, verifyafrica`}
-				canonical={`/resources/${resource.id}`}
-				image="https://readdy.ai/api/search-image?query=professional%20compliance%20resource%20document%20guide%20teal%20emerald%20color%20scheme%20clean%20modern%20corporate%20illustration%20minimal%20background&width=1200&height=630&seq=og-resource-detail&orientation=landscape"
+				canonical={resourcePath}
 				imageAlt={`${resource.title} – VerifyAfrica Resources`}
-				twitterCard="summary_large_image"
 				schema={schema}
+				{...DEFAULT_OG_IMAGE}
 			/>
 			<Navbar
 				onRequestDemo={openDemo}

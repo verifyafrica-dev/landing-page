@@ -3,6 +3,11 @@ import { useDemoModal } from "../../hooks/useDemoModal";
 import Navbar from "@/pages/home/components/Navbar";
 import SEOHead from "../../components/feature/SEOHead";
 import BackToTop from "../../components/feature/BackToTop";
+import { DEFAULT_OG_IMAGE, RESOURCES_SEO } from "@/constants/seo";
+import {
+	createBreadcrumbList,
+	createWebPageSchema,
+} from "@/lib/schema";
 import ResourcesHero from "./components/ResourcesHero";
 import ResourceCard, { Resource } from "./components/ResourceCard";
 import {
@@ -20,8 +25,6 @@ import {
 } from "@phosphor-icons/react";
 
 const Footer = lazy(() => import("@/pages/home/components/Footer"));
-
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://verifyafrica.io";
 
 export const resources: Resource[] = [
 	{
@@ -458,35 +461,16 @@ export const resources: Resource[] = [
 ];
 
 const resourcesSchema = [
-	{
-		"@context": "https://schema.org",
-		"@type": "CollectionPage",
-		"@id": `${SITE_URL}/resources#webpage`,
-		name: "VerifyAfrica Compliance Resources & Guides",
-		url: `${SITE_URL}/resources`,
-		description:
-			"Free compliance resources, checklists, and playbooks for African KYC, AML, and identity verification teams.",
-		inLanguage: "en",
-		isPartOf: { "@id": `${SITE_URL}/#website` },
-		about: { "@id": `${SITE_URL}/#organization` },
-		dateModified: new Date().toISOString().split("T")[0],
-		publisher: { "@id": `${SITE_URL}/#organization` },
-		breadcrumb: { "@id": `${SITE_URL}/resources#breadcrumb` },
-	},
-	{
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		"@id": `${SITE_URL}/resources#breadcrumb`,
-		itemListElement: [
-			{ "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-			{
-				"@type": "ListItem",
-				position: 2,
-				name: "Resources",
-				item: `${SITE_URL}/resources`,
-			},
-		],
-	},
+	createWebPageSchema({
+		path: RESOURCES_SEO.canonical,
+		type: "CollectionPage",
+		name: RESOURCES_SEO.title,
+		description: RESOURCES_SEO.description,
+	}),
+	createBreadcrumbList(RESOURCES_SEO.canonical, [
+		{ name: "Home", path: "/" },
+		{ name: "Resources", path: RESOURCES_SEO.canonical },
+	]),
 ];
 
 export default function ResourcesPage() {
@@ -530,14 +514,15 @@ export default function ResourcesPage() {
 	return (
 		<div className="min-h-screen bg-gray-50">
 			<SEOHead
-				title="Free Compliance Resources & Guides | VerifyAfrica"
-				description="Download free KYC checklists, AML templates, PEP screening guides, and compliance playbooks built for African fintech and financial services teams."
-				keywords="KYC checklist Africa, AML template, PEP screening guide, compliance playbook, African fintech compliance"
-				canonical="/resources"
-				image="https://readdy.ai/api/search-image?query=professional%20compliance%20resources%20and%20guides%20concept%20abstract%20documents%20checklists%20templates%20teal%20emerald%20color%20scheme%20clean%20modern%20corporate%20illustration%20minimal%20background&width=1200&height=630&seq=og-resources-v1&orientation=landscape"
-				imageAlt="VerifyAfrica Free Compliance Resources & Guides"
-				twitterCard="summary_large_image"
+				title={RESOURCES_SEO.title}
+				description={RESOURCES_SEO.description}
+				ogDescription={RESOURCES_SEO.ogDescription}
+				twitterDescription={RESOURCES_SEO.twitterDescription}
+				keywords={RESOURCES_SEO.keywords}
+				canonical={RESOURCES_SEO.canonical}
+				imageAlt={RESOURCES_SEO.imageAlt}
 				schema={resourcesSchema}
+				{...DEFAULT_OG_IMAGE}
 			/>
 			<Navbar
 				onRequestDemo={openDemo}

@@ -2,42 +2,15 @@ import SEOHead from "../../components/feature/SEOHead";
 import Footer from "@/pages/home/components/Footer";
 import { useDemoModal } from "../../hooks/useDemoModal";
 import Navbar from "../home/components/Navbar";
+import { DEFAULT_OG_IMAGE, TERMS_SEO } from "@/constants/seo";
+import { createLegalPageSchema } from "@/lib/schema";
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://verifyafrica.io";
-
-const termsSchema = [
-	{
-		"@context": "https://schema.org",
-		"@type": "WebPage",
-		name: "Terms of Service – VerifyAfrica",
-		url: `${SITE_URL}/terms`,
-		description:
-			"VerifyAfrica Terms of Service governing the use of our KYC, AML, and identity verification platform.",
-		publisher: {
-			"@type": "Organization",
-			name: "VerifyAfrica",
-			url: SITE_URL,
-		},
-	},
-	{
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		itemListElement: [
-			{
-				"@type": "ListItem",
-				position: 1,
-				name: "Home",
-				item: SITE_URL,
-			},
-			{
-				"@type": "ListItem",
-				position: 2,
-				name: "Terms of Service",
-				item: `${SITE_URL}/terms`,
-			},
-		],
-	},
-];
+const termsSchema = createLegalPageSchema(
+	TERMS_SEO.canonical,
+	"Terms of Service – VerifyAfrica",
+	TERMS_SEO.description,
+	"Terms of Service",
+);
 
 export default function TermsOfServicePage() {
 	const { openDemo } = useDemoModal();
@@ -45,14 +18,13 @@ export default function TermsOfServicePage() {
 	return (
 		<div className="min-h-screen bg-white">
 			<SEOHead
-				title="Terms of Service | VerifyAfrica"
-				description="Read VerifyAfrica's Terms of Service governing access to and use of our KYC, AML, and identity verification compliance platform."
-				canonical="/terms"
-				noIndex
-				image="https://readdy.ai/api/search-image?query=professional%20legal%20terms%20of%20service%20contract%20document%20concept%20abstract%20teal%20and%20white%20clean%20minimal%20corporate%20illustration%20compliance%20agreement%20handshake%20modern%20background&width=1200&height=630&seq=og-terms-v1&orientation=landscape"
-				imageAlt="VerifyAfrica Terms of Service"
-				twitterCard="summary_large_image"
+				title={TERMS_SEO.title}
+				description={TERMS_SEO.description}
+				canonical={TERMS_SEO.canonical}
+				noIndex={TERMS_SEO.noIndex}
+				imageAlt={TERMS_SEO.imageAlt}
 				schema={termsSchema}
+				{...DEFAULT_OG_IMAGE}
 			/>
 			<Navbar
 				onRequestDemo={openDemo}

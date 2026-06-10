@@ -16,7 +16,12 @@ import {
 
 interface SEOHeadProps {
 	title: string;
+	/** Meta description — Google SERP (~150–160 chars) */
 	description: string;
+	/** Open Graph description — social previews (~125 chars). Falls back to description. */
+	ogDescription?: string;
+	/** Twitter description (~200 chars). Falls back to ogDescription, then description. */
+	twitterDescription?: string;
 	keywords?: string | string[];
 	canonical?: string;
 	ogType?: string;
@@ -55,6 +60,8 @@ interface SEOHeadProps {
 export default function SEOHead({
 	title,
 	description,
+	ogDescription,
+	twitterDescription,
 	keywords,
 	canonical,
 	ogType = "website",
@@ -79,6 +86,9 @@ export default function SEOHead({
 	const resolvedImageHeight =
 		imageHeight ?? (resolvedImage === BRAND_LOGO_URL ? BRAND_LOGO_HEIGHT : DEFAULT_OG_IMAGE_HEIGHT);
 	const keywordsContent = Array.isArray(keywords) ? keywords.join(", ") : keywords;
+	const resolvedOgDescription = ogDescription ?? description;
+	const resolvedTwitterDescription =
+		twitterDescription ?? ogDescription ?? description;
 
 	useEffect(() => {
 		document.title = title;
@@ -142,7 +152,7 @@ export default function SEOHead({
 
 		// ── Open Graph ───────────────────────────────────────────────
 		setMeta('meta[property="og:title"]', "content", title);
-		setMeta('meta[property="og:description"]', "content", description);
+		setMeta('meta[property="og:description"]', "content", resolvedOgDescription);
 		setMeta('meta[property="og:url"]', "content", canonicalUrl);
 		setMeta('meta[property="og:type"]', "content", ogType);
 		setMeta('meta[property="og:site_name"]', "content", SITE_NAME);
@@ -187,7 +197,11 @@ export default function SEOHead({
 		setMeta('meta[name="twitter:site"]', "content", TWITTER_SITE);
 		setMeta('meta[name="twitter:creator"]', "content", TWITTER_SITE);
 		setMeta('meta[name="twitter:title"]', "content", title);
-		setMeta('meta[name="twitter:description"]', "content", description);
+		setMeta(
+			'meta[name="twitter:description"]',
+			"content",
+			resolvedTwitterDescription,
+		);
 
 		if (imageUrl) {
 			setMeta('meta[name="twitter:image"]', "content", imageUrl);
@@ -252,6 +266,8 @@ export default function SEOHead({
 	}, [
 		title,
 		description,
+		resolvedOgDescription,
+		resolvedTwitterDescription,
 		keywordsContent,
 		canonicalUrl,
 		ogType,

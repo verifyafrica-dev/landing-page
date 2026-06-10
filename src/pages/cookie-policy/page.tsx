@@ -2,42 +2,15 @@ import SEOHead from "../../components/feature/SEOHead";
 import Footer from "@/pages/home/components/Footer";
 import { useDemoModal } from "../../hooks/useDemoModal";
 import Navbar from "../home/components/Navbar";
+import { COOKIE_POLICY_SEO, DEFAULT_OG_IMAGE } from "@/constants/seo";
+import { createLegalPageSchema } from "@/lib/schema";
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://verifyafrica.io";
-
-const cookieSchema = [
-	{
-		"@context": "https://schema.org",
-		"@type": "WebPage",
-		name: "Cookie Policy – VerifyAfrica",
-		url: `${SITE_URL}/cookie-policy`,
-		description:
-			"VerifyAfrica Cookie Policy explaining how we use cookies and similar technologies on our compliance platform.",
-		publisher: {
-			"@type": "Organization",
-			name: "VerifyAfrica",
-			url: SITE_URL,
-		},
-	},
-	{
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		itemListElement: [
-			{
-				"@type": "ListItem",
-				position: 1,
-				name: "Home",
-				item: SITE_URL,
-			},
-			{
-				"@type": "ListItem",
-				position: 2,
-				name: "Cookie Policy",
-				item: `${SITE_URL}/cookie-policy`,
-			},
-		],
-	},
-];
+const cookieSchema = createLegalPageSchema(
+	COOKIE_POLICY_SEO.canonical,
+	"Cookie Policy – VerifyAfrica",
+	COOKIE_POLICY_SEO.description,
+	"Cookie Policy",
+);
 
 export default function CookiePolicyPage() {
 	const { openDemo } = useDemoModal();
@@ -45,14 +18,13 @@ export default function CookiePolicyPage() {
 	return (
 		<div className="min-h-screen bg-white">
 			<SEOHead
-				title="Cookie Policy | VerifyAfrica"
-				description="Learn how VerifyAfrica uses cookies and similar technologies on our KYC and AML compliance platform, and how you can manage your preferences."
-				canonical="/cookie-policy"
-				noIndex
-				image="https://readdy.ai/api/search-image?query=professional%20cookie%20consent%20privacy%20settings%20concept%20abstract%20browser%20window%20with%20toggle%20switches%20teal%20and%20white%20clean%20minimal%20corporate%20illustration%20GDPR%20cookie%20management%20modern%20background&width=1200&height=630&seq=og-cookie-v1&orientation=landscape"
-				imageAlt="VerifyAfrica Cookie Policy"
-				twitterCard="summary_large_image"
+				title={COOKIE_POLICY_SEO.title}
+				description={COOKIE_POLICY_SEO.description}
+				canonical={COOKIE_POLICY_SEO.canonical}
+				noIndex={COOKIE_POLICY_SEO.noIndex}
+				imageAlt={COOKIE_POLICY_SEO.imageAlt}
 				schema={cookieSchema}
+				{...DEFAULT_OG_IMAGE}
 			/>
 			<Navbar
 				onRequestDemo={openDemo}

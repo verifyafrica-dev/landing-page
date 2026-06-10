@@ -7,6 +7,8 @@ import {
 	BRAND_LOGO_HEIGHT,
 	BRAND_LOGO_PATH,
 	BRAND_LOGO_WIDTH,
+	DEFAULT_OG_IMAGE,
+	HOME_SEO,
 	SITE_URL,
 } from "@/constants/seo";
 import { useDemoModal } from "../../hooks/useDemoModal";
@@ -267,8 +269,10 @@ export default function HomePage() {
 	return (
 		<div className="min-h-screen bg-white">
 			<SEOHead
-				title="KYC, AML, Biometrics & KYB Verification in Africa | VerifyAfrica"
-				description="Onboard and monitor users across all 54 African countries through one platform. Verify identities, businesses, and risk profiles using AI-driven KYC, AML screening, biometrics, ongoing monitoring and audit-ready compliance controls for Banks, Fintech, FX Brokers, iGaming, and Marketplaces."
+				title={HOME_SEO.title}
+				description={HOME_SEO.description}
+				ogDescription={HOME_SEO.ogDescription}
+				twitterDescription={HOME_SEO.twitterDescription}
 				keywords={[
 					"KYC Africa",
 					"AML screening Africa",
@@ -279,12 +283,9 @@ export default function HomePage() {
 					"VerifyAfrica",
 				]}
 				canonical="/"
-				image={BRAND_LOGO_PATH}
-				imageAlt="VerifyAfrica – KYC, AML, Biometrics & KYB Verification in Africa"
-				imageWidth={BRAND_LOGO_WIDTH}
-				imageHeight={BRAND_LOGO_HEIGHT}
-				twitterCard="summary_large_image"
+				imageAlt={HOME_SEO.imageAlt}
 				schema={homeSchema}
+				{...DEFAULT_OG_IMAGE}
 			/>
 			<Navbar onRequestDemo={openDemo} />
 			{/* Above-fold — always eager */}

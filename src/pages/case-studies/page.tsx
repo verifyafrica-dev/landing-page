@@ -8,59 +8,28 @@ import Footer from "@/pages/home/components/Footer";
 import SEOHead from "../../components/feature/SEOHead";
 import BackToTop from "../../components/feature/BackToTop";
 import { useDemoModal } from "../../hooks/useDemoModal";
+import { CASE_STUDIES_SEO, DEFAULT_OG_IMAGE } from "@/constants/seo";
+import {
+	createBreadcrumbList,
+	createWebPageSchema,
+	pageUrl,
+} from "@/lib/schema";
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://verifyafrica.io";
+const caseStudiesPath = CASE_STUDIES_SEO.canonical;
+const caseStudiesUrl = pageUrl(caseStudiesPath);
 
 const caseStudiesSchema = [
-	// ── WebPage ──────────────────────────────────────────────────────────────
-	{
-		"@context": "https://schema.org",
-		"@type": "CollectionPage",
-		"@id": `${SITE_URL}/case-studies#webpage`,
-		name: "Case Studies & Use Cases – KYC & AML Across Africa | VerifyAfrica",
-		url: `${SITE_URL}/case-studies`,
-		description:
-			"Explore how VerifyAfrica powers KYC, AML, and identity verification for Fintech, FX Brokers, iGaming, Payment Providers, and Marketplaces across 54 African countries.",
-		inLanguage: "en",
-		isPartOf: { "@id": `${SITE_URL}/#website` },
-		about: { "@id": `${SITE_URL}/#organization` },
-		dateModified: new Date().toISOString().split("T")[0],
-		speakable: {
-			"@type": "SpeakableSpecification",
-			cssSelector: ["h1", "h2", ".case-studies-hero"],
-		},
-		breadcrumb: { "@id": `${SITE_URL}/case-studies#breadcrumb` },
-		publisher: { "@id": `${SITE_URL}/#organization` },
-	},
-
-	// ── Organization (back-reference) ────────────────────────────────────────
-	{
-		"@context": "https://schema.org",
-		"@type": "Organization",
-		"@id": `${SITE_URL}/#organization`,
-		name: "VerifyAfrica",
-		url: SITE_URL,
-		logo: {
-			"@type": "ImageObject",
-			url: `${SITE_URL}/logo.png`,
-			width: 200,
-			height: 60,
-		},
-		description:
-			"VerifyAfrica is Africa's leading AI-powered KYC, AML, and identity verification platform, enabling compliant onboarding across all 54 African countries.",
-		areaServed: { "@type": "Place", name: "Africa" },
-		sameAs: [
-			"https://x.com/V3rifyAfrica",
-			"https://www.linkedin.com/company/verifyafrica",
-			"https://www.instagram.com/verifyafrica_official",
-		],
-	},
-
-	// ── ItemList — industries served ─────────────────────────────────────────
+	createWebPageSchema({
+		path: caseStudiesPath,
+		type: "CollectionPage",
+		name: CASE_STUDIES_SEO.title,
+		description: CASE_STUDIES_SEO.description,
+		speakableCssSelectors: ["h1", "h2", ".case-studies-hero"],
+	}),
 	{
 		"@context": "https://schema.org",
 		"@type": "ItemList",
-		"@id": `${SITE_URL}/case-studies#industries`,
+		"@id": `${caseStudiesUrl}#industries`,
 		name: "Industries Served by VerifyAfrica",
 		description:
 			"Regulated industries across Africa that use VerifyAfrica for KYC, AML, and identity verification compliance.",
@@ -70,7 +39,7 @@ const caseStudiesSchema = [
 				"@type": "ListItem",
 				position: 1,
 				name: "Banks & Financial Institutions",
-				url: `${SITE_URL}/case-studies`,
+				url: caseStudiesUrl,
 				description:
 					"Traditional banks, microfinance institutions, and credit unions requiring robust KYC/AML compliance across Africa.",
 			},
@@ -78,7 +47,7 @@ const caseStudiesSchema = [
 				"@type": "ListItem",
 				position: 2,
 				name: "Fintechs & Payment Providers",
-				url: `${SITE_URL}/case-studies`,
+				url: caseStudiesUrl,
 				description:
 					"Digital payment platforms, mobile money operators, and fintech startups scaling across Africa with instant user verification.",
 			},
@@ -86,7 +55,7 @@ const caseStudiesSchema = [
 				"@type": "ListItem",
 				position: 3,
 				name: "FX Brokers",
-				url: `${SITE_URL}/case-studies`,
+				url: caseStudiesUrl,
 				description:
 					"Foreign exchange brokers requiring automated risk-based client tiering, EDD, and cross-border regulatory reporting.",
 			},
@@ -94,7 +63,7 @@ const caseStudiesSchema = [
 				"@type": "ListItem",
 				position: 4,
 				name: "iGaming & Sports Betting",
-				url: `${SITE_URL}/case-studies`,
+				url: caseStudiesUrl,
 				description:
 					"Online casinos and sports betting operators meeting AML and responsible gambling compliance across Africa's regulated markets.",
 			},
@@ -102,7 +71,7 @@ const caseStudiesSchema = [
 				"@type": "ListItem",
 				position: 5,
 				name: "Telecommunications",
-				url: `${SITE_URL}/case-studies`,
+				url: caseStudiesUrl,
 				description:
 					"Mobile network operators requiring SIM registration, mobile money compliance, and SIM swap fraud prevention.",
 			},
@@ -110,7 +79,7 @@ const caseStudiesSchema = [
 				"@type": "ListItem",
 				position: 6,
 				name: "E-commerce & Marketplaces",
-				url: `${SITE_URL}/case-studies`,
+				url: caseStudiesUrl,
 				description:
 					"Online marketplaces verifying buyers and sellers with identity confirmation and payment fraud prevention.",
 			},
@@ -118,7 +87,7 @@ const caseStudiesSchema = [
 				"@type": "ListItem",
 				position: 7,
 				name: "Insurance Companies",
-				url: `${SITE_URL}/case-studies`,
+				url: caseStudiesUrl,
 				description:
 					"Insurance providers requiring policyholder verification and claims fraud prevention across Africa.",
 			},
@@ -126,33 +95,16 @@ const caseStudiesSchema = [
 				"@type": "ListItem",
 				position: 8,
 				name: "Crypto & Web3",
-				url: `${SITE_URL}/case-studies`,
+				url: caseStudiesUrl,
 				description:
 					"Cryptocurrency exchanges and DeFi platforms meeting FATF travel rule and global compliance standards.",
 			},
 		],
 	},
-
-	// ── BreadcrumbList ───────────────────────────────────────────────────────
-	{
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		"@id": `${SITE_URL}/case-studies#breadcrumb`,
-		itemListElement: [
-			{
-				"@type": "ListItem",
-				position: 1,
-				name: "Home",
-				item: SITE_URL,
-			},
-			{
-				"@type": "ListItem",
-				position: 2,
-				name: "Case Studies & Use Cases",
-				item: `${SITE_URL}/case-studies`,
-			},
-		],
-	},
+	createBreadcrumbList(caseStudiesPath, [
+		{ name: "Home", path: "/" },
+		{ name: "Case Studies & Use Cases", path: caseStudiesPath },
+	]),
 	{
 		"@context": "https://schema.org",
 		"@type": "FAQPage",
@@ -239,17 +191,18 @@ export default function CaseStudiesPage() {
 	return (
 		<div className="min-h-screen bg-white">
 			<SEOHead
-				title="Case Studies & Use Cases – KYC & AML Across Africa | VerifyAfrica"
-				description="See how VerifyAfrica's compliance platform serves Fintech, FX Brokers, iGaming, Payment Providers, and Marketplaces across all 54 African countries with AI-powered KYC and AML."
-				keywords="KYC case studies Africa, AML use cases, identity verification Africa fintech, FX broker compliance Africa"
-				canonical="/case-studies"
-				image="https://readdy.ai/api/search-image?query=African%20fintech%20banking%20compliance%20industry%20sectors%20use%20cases%20mosaic%20grid%20teal%20emerald%20gradient%20professional%20corporate%20abstract%20illustration%20business%20identity%20verification%20KYC%20AML%20clean%20modern%20background&width=1200&height=630&seq=og-casestudies-v1&orientation=landscape"
-				imageAlt="VerifyAfrica Case Studies & Use Cases – KYC & AML Across Africa"
-				twitterCard="summary_large_image"
+				title={CASE_STUDIES_SEO.title}
+				description={CASE_STUDIES_SEO.description}
+				ogDescription={CASE_STUDIES_SEO.ogDescription}
+				twitterDescription={CASE_STUDIES_SEO.twitterDescription}
+				keywords={CASE_STUDIES_SEO.keywords}
+				canonical={CASE_STUDIES_SEO.canonical}
+				imageAlt={CASE_STUDIES_SEO.imageAlt}
 				schema={caseStudiesSchema}
 				geoRegion="AF"
 				geoPosition="8.7832;34.5085"
 				geoPlacename="Africa"
+				{...DEFAULT_OG_IMAGE}
 			/>
 			<Navbar
 				onRequestDemo={openDemo}

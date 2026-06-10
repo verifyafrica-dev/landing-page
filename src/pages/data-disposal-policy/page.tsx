@@ -2,42 +2,15 @@ import SEOHead from "../../components/feature/SEOHead";
 import Footer from "@/pages/home/components/Footer";
 import { useDemoModal } from "../../hooks/useDemoModal";
 import Navbar from "../home/components/Navbar";
+import { DATA_DISPOSAL_POLICY_SEO, DEFAULT_OG_IMAGE } from "@/constants/seo";
+import { createLegalPageSchema } from "@/lib/schema";
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://verifyafrica.io";
-
-const dataDisposalSchema = [
-	{
-		"@context": "https://schema.org",
-		"@type": "WebPage",
-		name: "Data Disposal & Destruction Policy – VerifyAfrica",
-		url: `${SITE_URL}/data-disposal-policy`,
-		description:
-			"VerifyAfrica Data Disposal & Destruction Policy outlining how personal and business data is securely retained, archived, and permanently destroyed.",
-		publisher: {
-			"@type": "Organization",
-			name: "VerifyAfrica",
-			url: SITE_URL,
-		},
-	},
-	{
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		itemListElement: [
-			{
-				"@type": "ListItem",
-				position: 1,
-				name: "Home",
-				item: SITE_URL,
-			},
-			{
-				"@type": "ListItem",
-				position: 2,
-				name: "Data Disposal Policy",
-				item: `${SITE_URL}/data-disposal-policy`,
-			},
-		],
-	},
-];
+const dataDisposalSchema = createLegalPageSchema(
+	DATA_DISPOSAL_POLICY_SEO.canonical,
+	"Data Disposal & Destruction Policy – VerifyAfrica",
+	DATA_DISPOSAL_POLICY_SEO.description,
+	"Data Disposal Policy",
+);
 
 export default function DataDisposalPolicyPage() {
 	const { openDemo } = useDemoModal();
@@ -45,14 +18,13 @@ export default function DataDisposalPolicyPage() {
 	return (
 		<div className="min-h-screen bg-white">
 			<SEOHead
-				title="Data Disposal &amp; Destruction Policy | VerifyAfrica"
-				description="Read VerifyAfrica's Data Disposal & Destruction Policy covering secure data retention, archiving, and certified destruction practices under GDPR, NDPR, and U.S. law."
-				canonical="/data-disposal-policy"
-				noIndex
-				image="https://readdy.ai/api/search-image?query=professional%20data%20destruction%20secure%20deletion%20concept%20abstract%20shredder%20document%20with%20digital%20binary%20elements%20teal%20and%20white%20clean%20minimal%20corporate%20illustration%20certified%20data%20disposal%20modern%20background&width=1200&height=630&seq=og-datadisposal-v1&orientation=landscape"
-				imageAlt="VerifyAfrica Data Disposal & Destruction Policy"
-				twitterCard="summary_large_image"
+				title={DATA_DISPOSAL_POLICY_SEO.title}
+				description={DATA_DISPOSAL_POLICY_SEO.description}
+				canonical={DATA_DISPOSAL_POLICY_SEO.canonical}
+				noIndex={DATA_DISPOSAL_POLICY_SEO.noIndex}
+				imageAlt={DATA_DISPOSAL_POLICY_SEO.imageAlt}
 				schema={dataDisposalSchema}
+				{...DEFAULT_OG_IMAGE}
 			/>
 			<Navbar
 				onRequestDemo={openDemo}

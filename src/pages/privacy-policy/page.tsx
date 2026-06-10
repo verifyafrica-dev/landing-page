@@ -2,42 +2,15 @@ import SEOHead from "../../components/feature/SEOHead";
 import Footer from "@/pages/home/components/Footer";
 import { useDemoModal } from "../../hooks/useDemoModal";
 import Navbar from "../home/components/Navbar";
+import { DEFAULT_OG_IMAGE, PRIVACY_POLICY_SEO } from "@/constants/seo";
+import { createLegalPageSchema } from "@/lib/schema";
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://verifyafrica.io";
-
-const privacySchema = [
-	{
-		"@context": "https://schema.org",
-		"@type": "WebPage",
-		name: "Privacy Policy – VerifyAfrica",
-		url: `${SITE_URL}/privacy-policy`,
-		description:
-			"VerifyAfrica Privacy Policy: how we collect, process, and protect personal data across our KYC and AML compliance platform.",
-		publisher: {
-			"@type": "Organization",
-			name: "VerifyAfrica",
-			url: SITE_URL,
-		},
-	},
-	{
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		itemListElement: [
-			{
-				"@type": "ListItem",
-				position: 1,
-				name: "Home",
-				item: SITE_URL,
-			},
-			{
-				"@type": "ListItem",
-				position: 2,
-				name: "Privacy Policy",
-				item: `${SITE_URL}/privacy-policy`,
-			},
-		],
-	},
-];
+const privacySchema = createLegalPageSchema(
+	PRIVACY_POLICY_SEO.canonical,
+	"Privacy Policy – VerifyAfrica",
+	PRIVACY_POLICY_SEO.description,
+	"Privacy Policy",
+);
 
 export default function PrivacyPolicyPage() {
 	const { openDemo } = useDemoModal();
@@ -45,14 +18,13 @@ export default function PrivacyPolicyPage() {
 	return (
 		<div className="min-h-screen bg-white">
 			<SEOHead
-				title="Privacy Policy | VerifyAfrica"
-				description="Read VerifyAfrica's Privacy Policy to understand how we collect, process, and protect personal data in our KYC, AML, and identity verification platform."
-				canonical="/privacy-policy"
-				noIndex
-				image="https://readdy.ai/api/search-image?query=professional%20data%20privacy%20protection%20concept%20abstract%20shield%20lock%20icon%20teal%20and%20white%20clean%20minimal%20corporate%20illustration%20GDPR%20compliance%20document%20secure%20data%20handling%20modern%20background&width=1200&height=630&seq=og-privacy-v1&orientation=landscape"
-				imageAlt="VerifyAfrica Privacy Policy"
-				twitterCard="summary_large_image"
+				title={PRIVACY_POLICY_SEO.title}
+				description={PRIVACY_POLICY_SEO.description}
+				canonical={PRIVACY_POLICY_SEO.canonical}
+				noIndex={PRIVACY_POLICY_SEO.noIndex}
+				imageAlt={PRIVACY_POLICY_SEO.imageAlt}
 				schema={privacySchema}
+				{...DEFAULT_OG_IMAGE}
 			/>
 			<Navbar
 				onRequestDemo={openDemo}

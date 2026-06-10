@@ -5,6 +5,12 @@ import Navbar from "@/pages/home/components/Navbar";
 import Footer from "@/pages/home/components/Footer";
 import { useDemoModal } from "@/hooks/useDemoModal";
 import SEOHead from "@/components/feature/SEOHead";
+import { DEFAULT_OG_IMAGE, FEATURES_INDEX_SEO } from "@/constants/seo";
+import {
+	createBreadcrumbList,
+	createWebPageSchema,
+	pageUrl,
+} from "@/lib/schema";
 import {
 	Card,
 	CardContent,
@@ -152,89 +158,74 @@ const CATEGORY_LABEL_MAP: Record<string, string> = {
 	"ongoing-monitoring": "Monitoring",
 };
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://verifyafrica.io";
+const featuresPath = FEATURES_INDEX_SEO.canonical;
+const featuresUrl = pageUrl(featuresPath);
 
 const featuresIndexSchema = [
-	{
-		"@context": "https://schema.org",
-		"@type": "CollectionPage",
-		"@id": `${SITE_URL}/features#webpage`,
-		name: "Platform Features – KYC, AML, Biometrics & KYB for Africa | VerifyAfrica",
-		url: `${SITE_URL}/features`,
-		description:
-			"Explore all VerifyAfrica platform capabilities: identity verification, KYB, AML screening, biometrics, fraud detection, address verification, transaction risk scoring, and ongoing monitoring across all 54 African countries.",
-		inLanguage: "en",
-		isPartOf: { "@id": `${SITE_URL}/#website` },
-		about: { "@id": `${SITE_URL}/#organization` },
-		dateModified: new Date().toISOString().split("T")[0],
-		publisher: { "@id": `${SITE_URL}/#organization` },
-		breadcrumb: {
-			"@type": "BreadcrumbList",
-			itemListElement: [
-				{ "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-				{
-					"@type": "ListItem",
-					position: 2,
-					name: "Features",
-					item: `${SITE_URL}/features`,
-				},
-			],
-		},
-	},
+	createWebPageSchema({
+		path: featuresPath,
+		type: "CollectionPage",
+		name: FEATURES_INDEX_SEO.title,
+		description: FEATURES_INDEX_SEO.description,
+	}),
+	createBreadcrumbList(featuresPath, [
+		{ name: "Home", path: "/" },
+		{ name: "Features", path: featuresPath },
+	]),
 	{
 		"@context": "https://schema.org",
 		"@type": "ItemList",
 		name: "VerifyAfrica Platform Features",
-		url: `${SITE_URL}/features`,
+		url: featuresUrl,
 		numberOfItems: 8,
 		itemListElement: [
 			{
 				"@type": "ListItem",
 				position: 1,
 				name: "Identity Verification",
-				url: `${SITE_URL}/features/identity-verification`,
+				url: `${featuresUrl}/identity-verification`,
 			},
 			{
 				"@type": "ListItem",
 				position: 2,
 				name: "Business Verification (KYB)",
-				url: `${SITE_URL}/features/business-verification-kyb`,
+				url: `${featuresUrl}/business-verification-kyb`,
 			},
 			{
 				"@type": "ListItem",
 				position: 3,
 				name: "AML & Sanctions Screening",
-				url: `${SITE_URL}/features/aml-sanctions-screening`,
+				url: `${featuresUrl}/aml-sanctions-screening`,
 			},
 			{
 				"@type": "ListItem",
 				position: 4,
 				name: "Fraud Detection",
-				url: `${SITE_URL}/features/fraud-detection`,
+				url: `${featuresUrl}/fraud-detection`,
 			},
 			{
 				"@type": "ListItem",
 				position: 5,
 				name: "Biometrics & Liveness",
-				url: `${SITE_URL}/features/biometrics-liveness`,
+				url: `${featuresUrl}/biometrics-liveness`,
 			},
 			{
 				"@type": "ListItem",
 				position: 6,
 				name: "Address Verification & Geolocation",
-				url: `${SITE_URL}/features/address-verification-geolocation`,
+				url: `${featuresUrl}/address-verification-geolocation`,
 			},
 			{
 				"@type": "ListItem",
 				position: 7,
 				name: "Transaction Risk Scoring",
-				url: `${SITE_URL}/features/transaction-risk-scoring`,
+				url: `${featuresUrl}/transaction-risk-scoring`,
 			},
 			{
 				"@type": "ListItem",
 				position: 8,
 				name: "Ongoing Monitoring",
-				url: `${SITE_URL}/features/ongoing-monitoring`,
+				url: `${featuresUrl}/ongoing-monitoring`,
 			},
 		],
 	},
@@ -1028,14 +1019,15 @@ export default function FeaturesIndexPage() {
 	return (
 		<>
 			<SEOHead
-				title="Platform Features – KYC, AML, Biometrics & KYB for Africa | VerifyAfrica"
-				description="Explore all VerifyAfrica platform capabilities: identity verification, KYB, AML screening, biometrics, fraud detection, address verification, transaction risk scoring, and ongoing monitoring across all 54 African countries."
-				keywords="KYC features Africa, AML screening platform, identity verification API, biometrics Africa, KYB business verification, fraud detection Africa"
-				canonical="/features"
-				image="https://readdy.ai/api/search-image?query=compliance%20platform%20features%20overview%20grid%20teal%20emerald%20abstract%20technology%20icons%20identity%20verification%20AML%20biometrics%20fraud%20detection%20professional%20corporate%20clean%20minimal%20background%20Africa%20fintech&width=1200&height=630&seq=og-features-index-v1&orientation=landscape"
-				imageAlt="VerifyAfrica Platform Features – KYC, AML, Biometrics & KYB for Africa"
-				twitterCard="summary_large_image"
+				title={FEATURES_INDEX_SEO.title}
+				description={FEATURES_INDEX_SEO.description}
+				ogDescription={FEATURES_INDEX_SEO.ogDescription}
+				twitterDescription={FEATURES_INDEX_SEO.twitterDescription}
+				keywords={FEATURES_INDEX_SEO.keywords}
+				canonical={FEATURES_INDEX_SEO.canonical}
+				imageAlt={FEATURES_INDEX_SEO.imageAlt}
 				schema={featuresIndexSchema}
+				{...DEFAULT_OG_IMAGE}
 			/>
 			<Navbar
 				onRequestDemo={openDemo}
