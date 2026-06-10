@@ -1079,13 +1079,7 @@ export default function FeaturesIndexPage() {
 							asChild
 							className="h-auto px-7 py-3.5 border-secondary/30 bg-transparent text-secondary font-semibold hover:border-secondary/60 hover:bg-secondary/10 hover:text-secondary cursor-pointer"
 						>
-							<a
-								href="https://docs.verifyafrica.io"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								Read API Docs
-							</a>
+							<Link to="/docs">Read API Docs</Link>
 						</Button>
 					</div>
 				</div>

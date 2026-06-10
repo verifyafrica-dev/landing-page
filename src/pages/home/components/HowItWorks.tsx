@@ -4,6 +4,7 @@ import {
 	SquaresFourIcon,
 	type Icon,
 } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 import { useScrollAnimation } from "../../../hooks/useScrollAnimation";
 
 const options = [
@@ -22,8 +23,9 @@ const options = [
 		title: "Integrate via API",
 		description:
 			"Embed identity and compliance checks directly into your onboarding flow or CRM. Flexible, modular, and built for scale.",
-		href: "https://docs.verifyafrica.io/",
+		href: "/docs",
 		linkLabel: "View API Docs",
+		isLink: true,
 	},
 ];
 
@@ -96,6 +98,7 @@ export interface HowItWorksCardProps {
 	description: string;
 	href: string;
 	linkLabel: string;
+	isLink?: boolean;
 	isVisible: boolean;
 	index?: number;
 }
@@ -128,11 +131,24 @@ function HowItWorksCard({
 	description,
 	href,
 	linkLabel,
+	isLink = false,
 	isVisible,
 	index = 0,
 }: HowItWorksCardProps) {
 	const styles = variantStyles[variant];
 	const CardIcon = icon;
+	const linkClassName = `inline-flex items-center gap-2 font-semibold transition-all group/link text-sm sm:text-base ${styles.link}`;
+	const linkContent = (
+		<>
+			<span className="relative">
+				{linkLabel}
+				<span
+					className={`absolute bottom-0 left-0 w-0 h-0.5 ${styles.linkUnderline} group-hover/link:w-full transition-all duration-300`}
+				/>
+			</span>
+			<ArrowRightIcon className="transition-transform group-hover/link:translate-x-2" />
+		</>
+	);
 
 	return (
 		<div
@@ -191,20 +207,20 @@ function HowItWorksCard({
 					>
 						{description}
 					</p>
-					<a
-						href={href}
-						target="_blank"
-						rel="noopener noreferrer"
-						className={`inline-flex items-center gap-2 font-semibold transition-all group/link text-sm sm:text-base ${styles.link}`}
-					>
-						<span className="relative">
-							{linkLabel}
-							<span
-								className={`absolute bottom-0 left-0 w-0 h-0.5 ${styles.linkUnderline} group-hover/link:w-full transition-all duration-300`}
-							/>
-						</span>
-						<ArrowRightIcon className="transition-transform group-hover/link:translate-x-2" />
-					</a>
+					{isLink ? (
+						<Link to={href} className={linkClassName}>
+							{linkContent}
+						</Link>
+					) : (
+						<a
+							href={href}
+							target="_blank"
+							rel="noopener noreferrer"
+							className={linkClassName}
+						>
+							{linkContent}
+						</a>
+					)}
 				</div>
 			</div>
 		</div>
