@@ -1,3 +1,4 @@
+// 2026-06-10: Article added — scaling-africa-1-trillion-digital-economy-trust-tax
 export const blogCategories = [
   'All Articles',
   'Regulatory Updates',
@@ -30,7 +31,7 @@ export const blogArticles = [
     // Full-width article page hero
     heroImage:
       'https://readdy.ai/api/search-image?query=wide%20panoramic%20abstract%20digital%20regulatory%20compliance%20concept%20West%20Africa%20geometric%20network%20patterns%20teal%20emerald%20dark%20green%20gradient%20ultra%20clean%20professional%20corporate%20illustration%20data%20flow%20lines%20modern%20fintech&width=896&height=384&seq=kyc-west-africa-hero-896&orientation=landscape',
-    featured: true,
+    featured: false,
   },
   {
     id: 'aml-screening-best-practices-african-fintechs',
@@ -161,6 +162,22 @@ export const blogArticles = [
     heroImage:
       'https://readdy.ai/api/search-image?query=wide%20panoramic%20abstract%20GDPR%20NDPR%20dual%20data%20protection%20framework%20comparison%20concept%20split%20design%20teal%20gold%20Europe%20Africa%20clean%20professional%20corporate%20illustration%20modern%20high%20resolution&width=896&height=384&seq=gdpr-hero-896&orientation=landscape',
     featured: false,
+  },
+  {
+    id: 'scaling-africa-1-trillion-digital-economy-trust-tax',
+    title: "Scaling Africa's $1 Trillion Digital Economy",
+    excerpt:
+      'Scaling a pan-African fintech? Learn how to eliminate the "Trust Tax," avoid cross-border KYC bottlenecks, and build infrastructure-level compliance.',
+    category: 'Best Practices',
+    author: 'Adaeze Okonkwo',
+    authorRole: 'Head of Compliance',
+    date: 'Jun 10, 2026',
+    readTime: '9 min read',
+    image:
+      'https://readdy.ai/api/search-image?query=abstract%20African%20digital%20economy%20concept%20geometric%20data%20streams%20flowing%20across%20a%20stylized%20map%20of%20Africa%20dark%20teal%20emerald%20green%20gradient%20gold%20accent%20nodes%20fintech%20infrastructure%20clean%20professional%20corporate%20illustration%20minimal%20card%20size&width=400&height=225&seq=blog-trust-tax-card&orientation=landscape',
+    heroImage:
+      'https://readdy.ai/api/search-image?query=wide%20panoramic%20abstract%20African%20digital%20economy%20trillion%20dollar%20infrastructure%20concept%20glowing%20network%20nodes%20connecting%20across%20a%20stylized%20African%20continent%20map%20dark%20teal%20emerald%20green%20gradient%20with%20gold%20highlights%20fintech%20compliance%20technology%20clean%20professional%20corporate%20illustration%20ultra%20modern&width=896&height=384&seq=blog-trust-tax-hero&orientation=landscape',
+    featured: true,
   },
 ];
 
