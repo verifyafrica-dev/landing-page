@@ -296,7 +296,7 @@ export default function HomeNavbar({
 
 			{/* Mobile overlay */}
 			<div
-				className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300 ${
+				className={`fixed inset-0 bg-gray-900/50 z-40 lg:hidden transition-opacity duration-300 ${
 					isMobileMenuOpen
 						? "opacity-100 pointer-events-auto"
 						: "opacity-0 pointer-events-none"

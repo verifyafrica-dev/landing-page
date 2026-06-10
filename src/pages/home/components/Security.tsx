@@ -1,8 +1,4 @@
-import {
-	GlobeIcon,
-	Lock,
-	ShieldCheckIcon,
-} from "@phosphor-icons/react";
+import { GlobeIcon, Lock, ShieldCheckIcon } from "@phosphor-icons/react";
 import { useScrollAnimation } from "../../../hooks/useScrollAnimation";
 
 const pillars = [
@@ -32,14 +28,12 @@ export default function Security() {
 	return (
 		<section
 			ref={ref}
-			className="py-16 sm:py-20 lg:py-28 bg-black text-white overflow-hidden"
+			className="py-16 sm:py-20 lg:py-28 bg-gray-900 text-white overflow-hidden"
 		>
 			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
 				<div
 					className={`text-center mb-10 sm:mb-14 lg:mb-16 transition-all duration-700 ease-out ${
-						isVisible
-							? "opacity-100 translate-y-0"
-							: "opacity-0 translate-y-8"
+						isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
 					}`}
 				>
 					<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight tracking-tight mb-4 sm:mb-5">
@@ -53,9 +47,7 @@ export default function Security() {
 
 				<div
 					className={`rounded-2xl sm:rounded-3xl bg-zinc-900 border border-white/10 overflow-hidden transition-all duration-700 ease-out delay-150 ${
-						isVisible
-							? "opacity-100 translate-y-0"
-							: "opacity-0 translate-y-10"
+						isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
 					}`}
 				>
 					<div className="grid grid-cols-1 md:grid-cols-3">
@@ -72,9 +64,7 @@ export default function Security() {
 									}`}
 									style={{
 										opacity: isVisible ? 1 : 0,
-										transform: isVisible
-											? "translateY(0)"
-											: "translateY(20px)",
+										transform: isVisible ? "translateY(0)" : "translateY(20px)",
 										transition: `all 0.5s ease-out ${250 + index * 120}ms`,
 									}}
 								>

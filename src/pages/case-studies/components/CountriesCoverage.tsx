@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { countriesServed, regions } from "../../../mocks/caseStudies";
-import {
-	ShieldCheckIcon,
-	XIcon,
-} from "@phosphor-icons/react";
+import { ShieldCheckIcon, XIcon } from "@phosphor-icons/react";
 
 interface CountryModalProps {
 	country: (typeof countriesServed)[0] | null;
@@ -15,7 +12,7 @@ function CountryModal({ country, onClose }: CountryModalProps) {
 
 	return (
 		<div
-			className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
+			className="fixed inset-0 bg-gray-900/60 flex items-center justify-center z-50 p-4"
 			onClick={onClose}
 		>
 			<div

@@ -53,7 +53,7 @@ export default function FeatureHero({ feature }: FeatureHeroProps) {
 						alt={feature.title}
 						className="w-full h-full object-cover object-center scale-105 animate-[slow-zoom_20s_ease-in-out_infinite_alternate]"
 					/>
-					<div className="absolute inset-0 bg-black/55" />
+					<div className="absolute inset-0 bg-gray-900/55" />
 					<div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70" />
 				</div>
 				<div
@@ -69,7 +69,10 @@ export default function FeatureHero({ feature }: FeatureHeroProps) {
 			<div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 py-32 max-w-5xl mx-auto">
 				<Fragment>
 					<div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-teal-300 text-sm font-medium mb-8">
-						<FeatureIcon className="size-4" aria-hidden />
+						<FeatureIcon
+							className="size-4"
+							aria-hidden
+						/>
 						<span>
 							{feature.tagline.split("—")[0]?.trim() || feature.tagline}
 						</span>
