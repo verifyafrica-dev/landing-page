@@ -20,7 +20,7 @@ const plans = [
 		name: "Growth Tier",
 		description: "For scaling businesses expanding into African markets",
 		platformFee: "$950",
-		verificationPrice: "$6–$10",
+
 		features: [
 			"All verification types included",
 			"Dashboard access",
@@ -38,7 +38,7 @@ const plans = [
 		name: "Enterprise Tier",
 		description: "For regulated, high-volume operators",
 		platformFee: "$1,750",
-		verificationPrice: "$5–$7",
+
 		features: [
 			"Everything in Growth",
 			"Priority support & SLA",
@@ -146,8 +146,7 @@ export default function Pricing() {
 										</p>
 									</div>
 									<p className="text-teal-700 text-xs font-semibold mt-3">
-										Verification pricing: {plan.verificationPrice} per bundle
-										check
+										Custom pricing per bundle
 									</p>
 								</CardHeader>
 								<CardContent className="flex-1 p-6 pt-0">
